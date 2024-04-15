@@ -86,5 +86,8 @@ public enum Stat
 	KnockBackStrength,
 	KnockBackRes,
 	ManaCost,
-	LifeStealRatio
+	LifeStealRatio,
+	ProjectileSpeed,
+	ProjectileTrackingRigidity,
+	ProjectileLifeTime
 }

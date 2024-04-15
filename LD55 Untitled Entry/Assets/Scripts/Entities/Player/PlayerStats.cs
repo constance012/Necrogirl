@@ -5,6 +5,9 @@ public class PlayerStats : EntityStats
 	[Header("Player Stats"), Space]
 	[SerializeField, Min(0f)] private float invincibilityTime;
 
+	[Header("Projectile Prefab"), Space]
+	[SerializeField] private GameObject projectilePrefab;
+
 	public static bool IsDeath { get; set; }
 	public float CurrentMana => _currentMana;
 	public bool IsAlive => _currentHealth > 0f;
@@ -40,6 +43,30 @@ public class PlayerStats : EntityStats
 	{
 		if (_invincibilityTime > 0f)
 			_invincibilityTime -= Time.deltaTime;
+
+		Attack();
+	}
+
+	private void Attack()
+	{
+		_attackInterval -= Time.deltaTime;
+
+		if (_attackInterval <= 0f)
+		{
+			if (InputManager.Instance.GetKeyDown(KeybindingActions.PrimaryAttack))
+			{
+				Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+				Vector2 direction = (mousePos - PlayerMovement.Position).normalized;
+				float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+				GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+				projectile.name = projectilePrefab.name;
+				projectile.transform.eulerAngles = Vector3.forward * angle;
+				projectile.GetComponent<SimpleProjectile>().Initialize(this.stats, null);
+
+				_attackInterval = AttackInterval;
+			}
+		}
 	}
 
 	public override void TakeDamage(float amount, bool weakpointHit, Vector3 attackerPos = default, float knockBackStrength = 0f)

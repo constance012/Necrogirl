@@ -51,7 +51,7 @@ public class AStarBrain : MonoBehaviour
 				if (current == endNode)
 				{
 					sw.Stop();
-					UnityDebug.Log($"Path found in: {sw.ElapsedMilliseconds} ms, or {sw.ElapsedTicks} ticks.");
+					//UnityDebug.Log($"Path found in: {sw.ElapsedMilliseconds} ms, or {sw.ElapsedTicks} ticks.");
 					pathFound = true;
 
 					break;

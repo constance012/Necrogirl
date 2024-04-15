@@ -5,10 +5,10 @@ public abstract class Seeker : MonoBehaviour
 {
 	[Header("Debug-only"), Space]
 	[SerializeField] private bool seekOnStart;
-	public Transform debugTarget;
 
-	[Header("Movement Delta Squared"), Space]
-	[SerializeField] protected float maxMovementDeltaSqr;
+	[Header("Movement Delta"), Space]
+	public Transform target;
+	[SerializeField] protected float maxMovementDelta;
 
 	// Private fields.
 	protected Vector3[] _path;
@@ -22,7 +22,7 @@ public abstract class Seeker : MonoBehaviour
 		if (seekOnStart)
 		{
 			yield return new WaitForSeconds(.1f);
-			PathRequester.Request(transform.position, debugTarget.position, OnPathFound);
+			PathRequester.Request(transform.position, target.position, OnPathFound);
 		}
 	}
 
@@ -36,7 +36,10 @@ public abstract class Seeker : MonoBehaviour
 	protected void OnPathFound(Vector3[] newPath, bool pathFound)
 	{
 		// Only start following the found path if this gameobject has not been destroyed yet.
-		if (pathFound && gameObject != null)
+		if (gameObject == null)
+			return;
+
+		if (pathFound)
 		{
 			_path = newPath;
 			_waypointIndex = 0;

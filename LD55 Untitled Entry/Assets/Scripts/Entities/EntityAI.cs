@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 
 public class EntityAI : Seeker
@@ -13,20 +14,32 @@ public class EntityAI : Seeker
 	[SerializeField] private float repelRange;
 	[SerializeField] private float repelAmplitude;
 
+	[Header("Spotting Settings")]
+	[SerializeField] protected float aggroRange;
+	[SerializeField] protected float spotTimer;
+	[SerializeField] protected LayerMask spotLayer;
+
     // Protected fields.
-    protected static HashSet<Rigidbody2D> _nearbyEntity;
+    protected static HashSet<Rigidbody2D> _nearbyEntities;
+	protected Collider2D[] _hitTargets = new Collider2D[5];
+	protected ContactFilter2D _contactFilter;
+	protected List<EntityStats> _inAggroTargets = new List<EntityStats>();
 	protected Vector2 _targetPreviousPos;
     protected bool _facingRight = true;
 
     protected virtual void Start()
     {
-        _nearbyEntity ??= new HashSet<Rigidbody2D>();
+        _nearbyEntities ??= new HashSet<Rigidbody2D>();
+
 		_targetPreviousPos = PlayerMovement.Position;
+
+		_contactFilter.layerMask = spotLayer;
+		_contactFilter.useLayerMask = true;
     }
 
     private void OnDestroy()
 	{
-		_nearbyEntity.Remove(rb2D);
+		_nearbyEntities.Remove(rb2D);
 	}
 
     protected virtual void FixedUpdate()
@@ -35,13 +48,39 @@ public class EntityAI : Seeker
 		 	return;
 		
 		animator.SetFloat("Speed", rb2D.velocity.sqrMagnitude);
+		SelectTarget();
+		FollowTarget();
+	}
 
-		// Request a path if the player has moved a certain distance fron the last position.
-		if ((PlayerMovement.Position - _targetPreviousPos).sqrMagnitude >= maxMovementDeltaSqr)
+	protected virtual void FollowTarget()
+	{
+		// Request a path if the target has moved a certain distance fron the last position.
+		if (Vector3.Distance(target.position, _targetPreviousPos) >= maxMovementDelta)
 		{
-			PathRequester.Request(transform.position, PlayerMovement.Position, OnPathFound);
-			_targetPreviousPos = PlayerMovement.Position;
+			PathRequester.Request(transform.position, target.position, OnPathFound);
+			_targetPreviousPos = target.position;
 		}
+	}
+
+	protected void SelectTarget()
+	{
+		int hitColliders = Physics2D.OverlapCircle(transform.position, aggroRange, _contactFilter, _hitTargets);
+
+		if (hitColliders > 0)
+		{
+			_inAggroTargets.Clear();
+			for (int i = 0; i < hitColliders; i++)
+			{
+				EntityStats target = _hitTargets[i].GetComponentInParent<EntityStats>();
+
+				if (target != null)
+					_inAggroTargets.Add(target);
+			}
+
+			_inAggroTargets.Sort();
+			target = _inAggroTargets[0].transform;
+			//Debug.Log(target.name);
+		} 
 	}
 
     protected override IEnumerator FollowPath(int previousIndex = -1)
@@ -51,7 +90,7 @@ public class EntityAI : Seeker
 
 		Vector2 currentWaypoint = previousIndex == -1 ? _path[0] : _path[previousIndex];
 
-		Debug.Log($"{gameObject.name} following path...");
+		//Debug.Log($"{gameObject.name} following path...");
 
 		while (true)
 		{
@@ -66,6 +105,7 @@ public class EntityAI : Seeker
 				{
 					_waypointIndex = 0;
 					_path = new Vector3[0];
+					rb2D.velocity = Vector2.zero;
 					yield break;
 				}
 
@@ -83,9 +123,10 @@ public class EntityAI : Seeker
 		}
     }
 
-    private void CheckFlip()
+    protected void CheckFlip()
 	{
-		float sign = Mathf.Sign(PlayerMovement.Position.x - rb2D.position.x);
+		float sign = target != null ? Mathf.Sign(target.position.x - rb2D.position.x) :
+									Mathf.Sign(PlayerMovement.Position.x - rb2D.position.x);
 		bool mustFlip = (_facingRight && sign < 0f) || (!_facingRight && sign > 0f);
 
 		if (mustFlip)
@@ -100,12 +141,12 @@ public class EntityAI : Seeker
 	/// </summary>
 	/// <param name="direction"></param>
 	/// <returns></returns>
-	private Vector2 CalculateVelocity(Vector2 direction)
+	protected Vector2 CalculateVelocity(Vector2 direction)
 	{
 		// Enemies will try to avoid each other.
 		Vector2 repelForce = Vector2.zero;
 
-		foreach (Rigidbody2D enemy in _nearbyEntity)
+		foreach (Rigidbody2D enemy in _nearbyEntities)
 		{
 			if (enemy == rb2D)
 				continue;
@@ -123,9 +164,12 @@ public class EntityAI : Seeker
 		return velocity;
 	}
 
-    protected virtual void OnDrawGizmosSelected()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
 		Gizmos.DrawWireSphere(transform.position, repelRange);
+
+		Gizmos.color = Color.red;
+		Gizmos.DrawWireSphere(transform.position, aggroRange);
     }
 }

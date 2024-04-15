@@ -78,6 +78,9 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6431119970926788331, guid: 5ca1749e49554ee41817349ecf77e00d, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 4254805639482373578}
+    - targetCorrespondingSourceObject: {fileID: 6431119970926788331, guid: 5ca1749e49554ee41817349ecf77e00d, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 4499327965451284646}
   m_SourcePrefab: {fileID: 100100000, guid: 5ca1749e49554ee41817349ecf77e00d, type: 3}
 --- !u!1 &414901759110421291 stripped
@@ -85,20 +88,14 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7486917215008954194, guid: 5ca1749e49554ee41817349ecf77e00d, type: 3}
   m_PrefabInstance: {fileID: 7072016430860569721}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &880608471481430187 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7934310947042245842, guid: 5ca1749e49554ee41817349ecf77e00d, type: 3}
-  m_PrefabInstance: {fileID: 7072016430860569721}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4259056093980357266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c302eb0a77f8a543af92b1a0c56c86a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &1014346613664121353 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 7797832840933641840, guid: 5ca1749e49554ee41817349ecf77e00d, type: 3}
+  m_PrefabInstance: {fileID: 7072016430860569721}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &4254393940804923158 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6426212008188437359, guid: 5ca1749e49554ee41817349ecf77e00d, type: 3}
   m_PrefabInstance: {fileID: 7072016430860569721}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &4259056093980357266 stripped
@@ -106,6 +103,31 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6431119970926788331, guid: 5ca1749e49554ee41817349ecf77e00d, type: 3}
   m_PrefabInstance: {fileID: 7072016430860569721}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4254805639482373578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4259056093980357266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c302eb0a77f8a543af92b1a0c56c86a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seekOnStart: 0
+  target: {fileID: 0}
+  maxMovementDelta: 0.5
+  rb2D: {fileID: 1014346613664121353}
+  animator: {fileID: 4254393940804923158}
+  stats: {fileID: 11400000, guid: 8549261ce51a62348b63d190d54749a8, type: 2}
+  repelRange: 1.5
+  repelAmplitude: 3
+  aggroRange: 30
+  spotTimer: 1
+  spotLayer:
+    serializedVersion: 2
+    m_Bits: 520
 --- !u!114 &4499327965451284646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,17 +141,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb2D: {fileID: 1014346613664121353}
-  brain: {fileID: 880608471481430187}
+  brain: {fileID: 4254805639482373578}
   dmgTextPrefab: {fileID: 1002002582291494483, guid: 5f49446ecb806b547a91c345d9b6b407, type: 3}
   dmgTextLoc: {fileID: 8907454796238077921}
   stats: {fileID: 11400000, guid: 8549261ce51a62348b63d190d54749a8, type: 2}
   damageFlashTime: 0.2
+  priority: 4
   deathEffect: {fileID: 414901759110421291}
-  attackRange: {x: 1, y: 1}
+  attackRange: {x: 1.5, y: 1.5}
   hitLayer:
     serializedVersion: 2
     m_Bits: 520
   healthBar: {fileID: 8023558463211511310}
+  animator: {fileID: 4254393940804923158}
 --- !u!114 &8023558463211511310 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 972142624115167863, guid: 5ca1749e49554ee41817349ecf77e00d, type: 3}

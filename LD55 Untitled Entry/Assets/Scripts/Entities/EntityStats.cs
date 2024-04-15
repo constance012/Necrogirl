@@ -1,7 +1,8 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
-public abstract class EntityStats : MonoBehaviour
+public abstract class EntityStats : MonoBehaviour, IComparable<EntityStats>
 {
 	[Header("Component References"), Space]
 	[SerializeField] protected Rigidbody2D rb2D;
@@ -14,9 +15,13 @@ public abstract class EntityStats : MonoBehaviour
 	[Header("Base Stats"), Space]
 	[SerializeField] protected Stats stats;
 	[SerializeField] protected float damageFlashTime;
+	[SerializeField] protected int priority;
 
 	[Header("Effects"), Space]
 	public GameObject deathEffect;
+
+	// Properties.
+	protected float AttackInterval => 1f / stats.GetDynamicStat(Stat.AttackSpeed);
 
 	// Protected fields.
 	protected Material _mat;
@@ -26,7 +31,7 @@ public abstract class EntityStats : MonoBehaviour
 	protected virtual void Start()
 	{
 		_currentHealth = stats.GetDynamicStat(Stat.MaxHealth);
-		_attackInterval = 1f / stats.GetDynamicStat(Stat.AttackSpeed);
+		_attackInterval = AttackInterval;
 	}
 
 	public virtual void TakeDamage(float amount, bool weakpointHit, Vector3 attackerPos = default, float knockBackStrength = 0f)
@@ -102,4 +107,9 @@ public abstract class EntityStats : MonoBehaviour
 
 		brain.enabled = true;
 	}
+
+    public int CompareTo(EntityStats other)
+    {
+        return other.priority - this.priority;
+    }
 }

@@ -20,6 +20,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2428981501112486871, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2428981501112486871, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4038556098368311010, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -106,6 +114,9 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6431119970926788331, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 8948742439565315813}
+    - targetCorrespondingSourceObject: {fileID: 6431119970926788331, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 9024563682823732112}
   m_SourcePrefab: {fileID: 100100000, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
 --- !u!4 &2417811803671844636 stripped
@@ -129,17 +140,6 @@ Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 7797832840933641840, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
   m_PrefabInstance: {fileID: 4050056090894623876}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6203040232861266897 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7935642385781397333, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
-  m_PrefabInstance: {fileID: 4050056090894623876}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6992785119344630383}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28f299641978cc146a1ee78973da25bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6539162439813066274 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7100897990592432806, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
@@ -150,6 +150,31 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6431119970926788331, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
   m_PrefabInstance: {fileID: 4050056090894623876}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8948742439565315813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6992785119344630383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28f299641978cc146a1ee78973da25bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seekOnStart: 0
+  target: {fileID: 0}
+  maxMovementDelta: 0.5
+  rb2D: {fileID: 6053901303285279476}
+  animator: {fileID: 6997130681893881835}
+  stats: {fileID: 11400000, guid: ce1d907983bdf1a4d9d6518e19b82a3c, type: 2}
+  repelRange: 1.5
+  repelAmplitude: 3
+  aggroRange: 30
+  spotTimer: 0.5
+  spotLayer:
+    serializedVersion: 2
+    m_Bits: 72
 --- !u!114 &9024563682823732112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,14 +188,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb2D: {fileID: 6053901303285279476}
-  brain: {fileID: 6203040232861266897}
+  brain: {fileID: 8948742439565315813}
   dmgTextPrefab: {fileID: 1002002582291494483, guid: 5f49446ecb806b547a91c345d9b6b407, type: 3}
   dmgTextLoc: {fileID: 2417811803671844636}
   stats: {fileID: 11400000, guid: ce1d907983bdf1a4d9d6518e19b82a3c, type: 2}
   damageFlashTime: 0.2
+  priority: 4
   deathEffect: {fileID: 6539162439813066274}
-  attackRange: {x: 1, y: 1}
+  attackRange: {x: 1.5, y: 1.5}
   hitLayer:
     serializedVersion: 2
     m_Bits: 64
   healthBar: {fileID: 3839615681994225395}
+  animator: {fileID: 6997130681893881835}
+--- !u!95 &6997130681893881835 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6426212008188437359, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
+  m_PrefabInstance: {fileID: 4050056090894623876}
+  m_PrefabAsset: {fileID: 0}

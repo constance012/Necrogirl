@@ -53,6 +53,7 @@ public class SummonManager : Singleton<SummonManager>
 			float y = Random.Range(PlayerMovement.Position.y - summonRange.y, PlayerMovement.Position.y + summonRange.y);
 
 			GameObject unit = Instantiate(unitPrefabs[index], new Vector2(x, y), Quaternion.identity);
+			unit.name = unitPrefabs[index].name;
 			unit.transform.SetParent(container);
 
 			player.ConsumeMana(manaCost);
@@ -73,6 +74,7 @@ public class SummonManager : Singleton<SummonManager>
 			float y = Random.Range(PlayerMovement.Position.y - summonRange.y, PlayerMovement.Position.y + summonRange.y);
 
 			GameObject unit = Instantiate(unitPrefabs[index], new Vector2(x, y), Quaternion.identity);
+			unit.name = unitPrefabs[index].name;
 			unit.transform.SetParent(container);
 
 			player.ConsumeMana(manaCost);

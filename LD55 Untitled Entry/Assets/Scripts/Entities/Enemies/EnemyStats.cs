@@ -31,7 +31,7 @@ public class EnemyStats : EntityStats
 
 	public override void TakeDamage(float amount, bool weakpointHit, Vector3 attackerPos = default, float knockBackStrength = 0)
 	{
-		(brain as EnemyAI).Alert();
+		(brain as MeleeEnemyAI).Alert();
 
 		base.TakeDamage(amount, weakpointHit, attackerPos, knockBackStrength);
 

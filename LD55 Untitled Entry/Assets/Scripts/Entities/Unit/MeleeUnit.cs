@@ -2,7 +2,10 @@ using UnityEngine;
 
 public class MeleeUnit : UnitStats
 {
-    private void LateUpdate()
+	[Header("Animator"), Space]
+	[SerializeField] private Animator animator;
+
+    private void Update()
 	{
 		_attackInterval -= Time.deltaTime;
 
@@ -10,15 +13,19 @@ public class MeleeUnit : UnitStats
 		{
 			int hitColliders = Physics2D.OverlapBox(transform.position, attackRange, 0f, _contactFilter, _hitObjects);
 
-			for (int i = 0; i < hitColliders; i++)
+			if (hitColliders > 0)
 			{
-				EnemyStats enemy = _hitObjects[i].GetComponentInParent<EnemyStats>();
+				animator.Play("Slash");
+				for (int i = 0; i < hitColliders; i++)
+				{
+					EnemyStats enemy = _hitObjects[i].GetComponentInParent<EnemyStats>();
 
-				if (enemy != null)
-					enemy.TakeDamage(stats.GetDynamicStat(Stat.Damage), false, transform.position, stats.GetStaticStat(Stat.KnockBackStrength));
+					if (enemy != null)
+						enemy.TakeDamage(stats.GetDynamicStat(Stat.Damage), false, transform.position, stats.GetStaticStat(Stat.KnockBackStrength));
+				}
+
+				_attackInterval = AttackInterval;
 			}
-
-			_attackInterval = 1f / stats.GetDynamicStat(Stat.AttackSpeed);
 		}
 	}
 }

@@ -1,11 +1,7 @@
 ﻿using UnityEngine;
 
-public class EnemyAI : EntityAI
+public class MeleeEnemyAI : EntityAI
 {
-	[Header("Spotting Settings")]
-	[SerializeField] private float aggroRange;
-	[SerializeField] private float spotTimer;
-
 	// Private fields.
 	private bool _spottedPlayer;
 	private float _spotTimer;
@@ -21,11 +17,10 @@ public class EnemyAI : EntityAI
 		if (PlayerStats.IsDeath)
 			return;
 
-		SpotPlayer();
-        
+		SpotTarget();
     }
 
-    private void SpotPlayer()
+    private void SpotTarget()
     {
         if (!_spottedPlayer)
 		{
@@ -45,14 +40,9 @@ public class EnemyAI : EntityAI
 		}
 
 		animator.SetFloat("Speed", rb2D.velocity.sqrMagnitude);
-
-		// Request a path if the player has moved a certain distance fron the last position.
-		if ((PlayerMovement.Position - _targetPreviousPos).sqrMagnitude >= maxMovementDeltaSqr)
-		{
-			PathRequester.Request(transform.position, PlayerMovement.Position, OnPathFound);
-			_targetPreviousPos = PlayerMovement.Position;
-		}
-    }
+		SelectTarget();
+		FollowTarget();
+	}
 
 	public void Alert()
 	{
@@ -60,12 +50,6 @@ public class EnemyAI : EntityAI
 		_spotTimer = 0f;
 
 		// Add this enemy to the hash set.
-		_nearbyEntity.Add(rb2D);
-	}
-
-	protected override void OnDrawGizmosSelected()
-	{
-		Gizmos.color = Color.red;
-		Gizmos.DrawWireSphere(transform.position, aggroRange);
+		_nearbyEntities.Add(rb2D);
 	}
 }
