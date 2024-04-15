@@ -3,10 +3,11 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("References"), Space]
+	[SerializeField] private Stats stats;
     [SerializeField] private Rigidbody2D rb2D;
+	[SerializeField] private Animator animator;
     
     [Header("Mobility Settings"), Space]
-	[SerializeField] private float maxSpeed;
 	[SerializeField] private float acceleration;
 	[SerializeField] private float deceleration;
 
@@ -39,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
 		if (_movementDirection.magnitude > .1f)
 		{
 			_currentSpeed += acceleration * Time.deltaTime;
-			_currentSpeed = Mathf.Min(maxSpeed, _currentSpeed);
+			_currentSpeed = Mathf.Min(stats.GetDynamicStat(Stat.MoveSpeed), _currentSpeed);
 			
 			rb2D.velocity = _movementDirection * _currentSpeed;
 		}
@@ -51,5 +52,7 @@ public class PlayerMovement : MonoBehaviour
 
 			rb2D.velocity = _previousDirection * _currentSpeed;
 		}
+
+		animator.SetFloat("Speed", rb2D.velocity.magnitude);
 	}
 }

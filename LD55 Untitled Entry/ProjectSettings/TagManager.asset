@@ -5,17 +5,18 @@ TagManager:
   serializedVersion: 2
   tags:
   - WorldCanvas
+  - WeakpointTrigger
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Enemy
+  - Environment
+  - Interactable
+  - Unit
   - 
   - 
   - 

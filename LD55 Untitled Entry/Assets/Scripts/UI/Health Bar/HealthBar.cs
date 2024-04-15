@@ -36,7 +36,7 @@ public class HealthBar : MonoBehaviour
 		_fxFillRect = fxSlider.fillRect.GetComponent<Image>();
 	}
 
-	public void SetCurrentHealth(int current)
+	public void SetCurrentHealth(float current)
 	{
 		if (_fxCoroutine != null)
 			StopCoroutine(_fxCoroutine);
@@ -57,12 +57,12 @@ public class HealthBar : MonoBehaviour
 			fxSlider.value = current;
 		}
 
-		displayText.text = $"{current} / {mainSlider.maxValue}";
+		displayText.text = $"{current:0} / {mainSlider.maxValue}";
 
 		_fxCoroutine = StartCoroutine(PerformEffect());
 	}
 
-	public void SetMaxHealth(int max, bool initialize = true)
+	public void SetMaxHealth(float max, bool initialize = true)
 	{
 		mainSlider.maxValue = max;
 		fxSlider.maxValue = max;
@@ -71,7 +71,7 @@ public class HealthBar : MonoBehaviour
 		{
 			mainSlider.value = max;
 			fxSlider.value = max;
-			displayText.text = $"{max} / {max}";
+			displayText.text = $"{max:0} / {max:0}";
 		}
 	}
 

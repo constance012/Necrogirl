@@ -21,7 +21,7 @@ public class DamageText : MonoBehaviour
 	public static readonly Color CriticalColor = new Color(.821f, .546f, .159f);
 	public static readonly Color DamageColor = Color.red;
 	public static readonly Color HealingColor = Color.green;
-	public static readonly Color PowerUpColor = new Color(.707f, .11f, .353f);
+	public static readonly Color ManaColor = new Color(.129f, .509f, .830f);
 	public static readonly Color BonusScoreColor = new Color(.792f, .13f, .714f);
 
 	// Private fields.
