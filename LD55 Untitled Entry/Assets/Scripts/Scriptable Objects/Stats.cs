@@ -71,6 +71,21 @@ public class Stats : ScriptableObject
 
 		return baseValue;
 	}
+
+    public override string ToString()
+    {
+        string result = "";
+		foreach (KeyValuePair<Stat, float> stat in dynamicStats)
+		{
+			result += $"{stat.Key}: {stat.Value}\n";
+		}
+		result += "\n";
+		foreach (KeyValuePair<Stat, float> stat in staticStats)
+		{
+			result += $"{stat.Key}: {stat.Value}\n";
+		}
+		return result.TrimEnd('\r', '\n');
+    }
 }
 
 public enum Stat

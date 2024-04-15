@@ -24,9 +24,13 @@ MonoBehaviour:
       keyCode: 119
     - action: 5
       keyCode: 115
-    - action: 8
-      keyCode: 101
+    - action: 6
+      keyCode: 104
+    - action: 7
+      keyCode: 106
     - action: 9
+      keyCode: 101
+    - action: 10
       keyCode: 27
   subFolders: Keyset
   extension: .cst

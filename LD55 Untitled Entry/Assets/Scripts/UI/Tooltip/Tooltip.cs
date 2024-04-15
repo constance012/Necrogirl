@@ -18,14 +18,6 @@ public class Tooltip : MonoBehaviour
 	[SerializeField] private LayoutElement layoutElement;
 	[SerializeField] private RectTransform rectTransform;
 
-	private void Awake()
-	{
-		header = transform.Find("Header").GetComponent<TextMeshProUGUI>();
-		content = transform.Find("Content").GetComponent<TextMeshProUGUI>();
-		layoutElement = GetComponent<LayoutElement>();
-		rectTransform = GetComponent<RectTransform>();
-	}
-
 	// Update is called once per frame
 	private void Update()
 	{

@@ -487,7 +487,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0e9bb7412aac363458d0b1fb0f91365f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 49f63f62ff187094489b51f73943000a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -510,6 +510,7 @@ GameObject:
   - component: {fileID: 1577625753130168879}
   - component: {fileID: 3704622127378247404}
   - component: {fileID: 4249509561973908566}
+  - component: {fileID: 6313834742910228368}
   - component: {fileID: 8730811856146810911}
   m_Layer: 5
   m_Name: Unit Button
@@ -646,6 +647,21 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &6313834742910228368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7864239229877734148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c467cee48f15f54418329d7163b9ae30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  header: 
+  content: 
+  popupDelay: 0.5
 --- !u!114 &8730811856146810911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -662,3 +678,4 @@ MonoBehaviour:
   manaCostText: {fileID: 7098139997133729929}
   canvasGroup: {fileID: 4249509561973908566}
   button: {fileID: 3704622127378247404}
+  trigger: {fileID: 6313834742910228368}

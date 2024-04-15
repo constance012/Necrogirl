@@ -120,11 +120,6 @@ Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 7797832840933641840, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
   m_PrefabInstance: {fileID: 4050056090894623876}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &6539162439813066274 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7100897990592432806, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
-  m_PrefabInstance: {fileID: 4050056090894623876}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6992785119344630383 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6431119970926788331, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
@@ -145,7 +140,7 @@ MonoBehaviour:
   seekOnStart: 0
   target: {fileID: 0}
   maxMovementDelta: 0.5
-  rb2D: {fileID: 7797832840933641840, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
+  rb2D: {fileID: 6053901303285279476}
   animator: {fileID: 6997130681893881835}
   stats: {fileID: 11400000, guid: 8f906735cfc863b4fb0d6a3985cca268, type: 2}
   repelRange: 1.5
@@ -174,7 +169,7 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: 8f906735cfc863b4fb0d6a3985cca268, type: 2}
   damageFlashTime: 0.2
   priority: 2
-  deathEffect: {fileID: 6539162439813066274}
+  deathEffect: {fileID: 8785179139041795559, guid: 90f8049227c718b45a849b688c69c3e4, type: 3}
   attackRange: {x: 1.5, y: 1.5}
   hitLayer:
     serializedVersion: 2

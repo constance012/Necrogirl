@@ -36,7 +36,7 @@ public abstract class Seeker : MonoBehaviour
 	protected void OnPathFound(Vector3[] newPath, bool pathFound)
 	{
 		// Only start following the found path if this gameobject has not been destroyed yet.
-		if (gameObject == null)
+		if (gameObject == null || target == null)
 			return;
 
 		if (pathFound)

@@ -31,7 +31,6 @@ public abstract class EntityStats : MonoBehaviour, IComparable<EntityStats>
 	protected virtual void Start()
 	{
 		_currentHealth = stats.GetDynamicStat(Stat.MaxHealth);
-		_attackInterval = AttackInterval;
 	}
 
 	public virtual void TakeDamage(float amount, bool weakpointHit, Vector3 attackerPos = default, float knockBackStrength = 0f)

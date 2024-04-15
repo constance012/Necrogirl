@@ -12,7 +12,7 @@ public class PlayerStats : EntityStats
 	public float CurrentMana => _currentMana;
 	public bool IsAlive => _currentHealth > 0f;
 
-	// Private fields.
+	// Private fields
 	private float _invincibilityTime;
 	private float _currentMana;
 

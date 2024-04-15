@@ -53,9 +53,10 @@ public class Item : ScriptableObject
 	public bool isDefaultItem;
 	public bool canBeUsed;
 
-	public virtual void Use()
+	public virtual bool Use()
 	{
 		Debug.Log("Using " + itemName);
+		return true;
 	}
 
 	public override string ToString()

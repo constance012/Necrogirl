@@ -21,7 +21,7 @@ MonoBehaviour:
     - Key: 9
       Value: 12
     - Key: 10
-      Value: 20
+      Value: 10
     - Key: 11
       Value: 5
   dynamicStats:

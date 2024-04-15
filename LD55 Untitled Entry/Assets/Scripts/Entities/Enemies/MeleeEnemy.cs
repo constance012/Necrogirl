@@ -20,7 +20,7 @@ public class MeleeEnemy : EnemyStats
 				{
 					EntityStats entity = _hitObjects[i].GetComponentInParent<EntityStats>();
 
-					if (entity != null && entity.GetType() != typeof(EnemyStats))
+					if (entity != null)
 						entity.TakeDamage(stats.GetDynamicStat(Stat.Damage), false, transform.position, stats.GetStaticStat(Stat.KnockBackStrength));
 				}
 

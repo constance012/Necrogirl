@@ -71,15 +71,19 @@ public class EntityAI : Seeker
 			_inAggroTargets.Clear();
 			for (int i = 0; i < hitColliders; i++)
 			{
-				EntityStats target = _hitTargets[i].GetComponentInParent<EntityStats>();
+				EntityStats entity = _hitTargets[i].GetComponentInParent<EntityStats>();
 
-				if (target != null)
-					_inAggroTargets.Add(target);
+				if (entity != null)
+					_inAggroTargets.Add(entity);
 			}
-
-			_inAggroTargets.Sort();
-			target = _inAggroTargets[0].transform;
-			//Debug.Log(target.name);
+			
+			// Sort by priority.
+			if (_inAggroTargets.Count > 0)
+			{
+				_inAggroTargets.Sort();
+				target = _inAggroTargets[0].transform;
+				Debug.Log(target.name);
+			}
 		} 
 	}
 

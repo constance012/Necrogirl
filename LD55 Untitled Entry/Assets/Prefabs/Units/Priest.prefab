@@ -68,6 +68,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Priest
       objectReference: {fileID: 0}
+    - target: {fileID: 7285958529990537221, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7285958529990537221, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7935642385781397333, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
       propertyPath: stats
       value: 
@@ -83,5 +91,92 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6431119970926788331, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5953781075852726742}
+    - targetCorrespondingSourceObject: {fileID: 6431119970926788331, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3794817410577684341}
   m_SourcePrefab: {fileID: 100100000, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
+--- !u!4 &2417811803671844636 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1853648545714090904, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
+  m_PrefabInstance: {fileID: 4050056090894623876}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3839615681994225395 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 972142624115167863, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
+  m_PrefabInstance: {fileID: 4050056090894623876}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1bc3c91628ee8643bab169f4fd468b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!50 &6053901303285279476 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 7797832840933641840, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
+  m_PrefabInstance: {fileID: 4050056090894623876}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6992785119344630383 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6431119970926788331, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
+  m_PrefabInstance: {fileID: 4050056090894623876}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5953781075852726742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6992785119344630383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dac3a55d48f02b64da80cbade5d73c5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seekOnStart: 0
+  target: {fileID: 0}
+  maxMovementDelta: 0
+  rb2D: {fileID: 6053901303285279476}
+  animator: {fileID: 6997130681893881835}
+  stats: {fileID: 11400000, guid: b1c88011226a40a44bd6552815592961, type: 2}
+  repelRange: 1.5
+  repelAmplitude: 3
+  aggroRange: 30
+  spotTimer: 0.5
+  spotLayer:
+    serializedVersion: 2
+    m_Bits: 72
+--- !u!114 &3794817410577684341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6992785119344630383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b0c94d774fb70641bbf493a18e59554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb2D: {fileID: 6053901303285279476}
+  brain: {fileID: 5953781075852726742}
+  dmgTextPrefab: {fileID: 1002002582291494483, guid: 5f49446ecb806b547a91c345d9b6b407, type: 3}
+  dmgTextLoc: {fileID: 2417811803671844636}
+  stats: {fileID: 11400000, guid: b1c88011226a40a44bd6552815592961, type: 2}
+  damageFlashTime: 0.2
+  priority: 3
+  deathEffect: {fileID: 8785179139041795559, guid: 90f8049227c718b45a849b688c69c3e4, type: 3}
+  attackRange: {x: 4, y: 4}
+  hitLayer:
+    serializedVersion: 2
+    m_Bits: 520
+  healthBar: {fileID: 3839615681994225395}
+--- !u!95 &6997130681893881835 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6426212008188437359, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
+  m_PrefabInstance: {fileID: 4050056090894623876}
+  m_PrefabAsset: {fileID: 0}

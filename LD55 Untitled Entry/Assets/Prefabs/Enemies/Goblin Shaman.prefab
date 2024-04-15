@@ -87,11 +87,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 4193198861709201875}
   m_SourcePrefab: {fileID: 100100000, guid: 5ca1749e49554ee41817349ecf77e00d, type: 3}
---- !u!1 &414901759110421291 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7486917215008954194, guid: 5ca1749e49554ee41817349ecf77e00d, type: 3}
-  m_PrefabInstance: {fileID: 7072016430860569721}
-  m_PrefabAsset: {fileID: 0}
 --- !u!50 &1014346613664121353 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 7797832840933641840, guid: 5ca1749e49554ee41817349ecf77e00d, type: 3}
@@ -127,7 +122,7 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: a733902aaf4a0d643984a85540c14d7f, type: 2}
   repelRange: 1.5
   repelAmplitude: 3
-  aggroRange: 30
+  aggroRange: 20
   spotTimer: 1
   spotLayer:
     serializedVersion: 2
@@ -152,7 +147,7 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: a733902aaf4a0d643984a85540c14d7f, type: 2}
   damageFlashTime: 0.2
   priority: 3
-  deathEffect: {fileID: 414901759110421291}
+  deathEffect: {fileID: 8785179139041795559, guid: 90f8049227c718b45a849b688c69c3e4, type: 3}
   attackRange: {x: 6, y: 6}
   hitLayer:
     serializedVersion: 2

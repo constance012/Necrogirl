@@ -2,18 +2,27 @@ using UnityEngine;
 
 public class ItemPickup : Interactable
 {
-	[Header("Current Item Info")]
-	[Space]
+	[Header("Current Item Info"), Space]
 
 	[Tooltip("The scriptable object represents this item.")]
 	public Item itemSO;
+	public int ItemQuantity
+	{
+		get { return _currentItem.quantity; }
+		set { _overrideQuantity = value; }
+	}
 
+	// Private fields.
 	private Item _currentItem;
+	private int _overrideQuantity = -1;
 
 	private void Start()
 	{
 		_currentItem = Instantiate(itemSO);
 		_currentItem.name = itemSO.name;
+
+		if (_overrideQuantity != -1)
+			_currentItem.quantity = _overrideQuantity;
 
 		spriteRenderer.sprite = _currentItem.icon;		
 	}
@@ -81,5 +90,9 @@ public class ItemPickup : Interactable
 		Debug.Log("You're picking up a(n) " + _currentItem.itemName);
 
 		Destroy(clone.gameObject);
+
+		GameManager.Instance.AddItem(_currentItem);
+
+		Destroy(gameObject);
 	}
 }
