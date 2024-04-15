@@ -21,10 +21,12 @@ public abstract class EntityStats : MonoBehaviour
 	// Protected fields.
 	protected Material _mat;
 	protected float _currentHealth;
+	protected float _attackInterval;
 
 	protected virtual void Start()
 	{
 		_currentHealth = stats.GetDynamicStat(Stat.MaxHealth);
+		_attackInterval = 1f / stats.GetDynamicStat(Stat.AttackSpeed);
 	}
 
 	public virtual void TakeDamage(float amount, bool weakpointHit, Vector3 attackerPos = default, float knockBackStrength = 0f)

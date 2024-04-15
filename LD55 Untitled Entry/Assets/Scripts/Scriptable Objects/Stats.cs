@@ -1,11 +1,26 @@
 using UnityEngine;
 using AYellowpaper.SerializedCollections;
+using System.Collections.Generic;
 
 [CreateAssetMenu(menuName = "Unit Stats", fileName = "New Blank Stats")]
 public class Stats : ScriptableObject
 {
 	public SerializedDictionary<Stat, float> staticStats = new SerializedDictionary<Stat, float>();
 	public SerializedDictionary<Stat, float> dynamicStats = new SerializedDictionary<Stat, float>();
+
+	// Private fields.
+	private List<StatsUpgrade> appliedUpgrades = new List<StatsUpgrade>();
+
+	public void AddUpgrade(StatsUpgrade upgrade)
+	{
+		if (!appliedUpgrades.Contains(upgrade))
+			appliedUpgrades.Add(upgrade);
+	}
+
+	public void ClearUpgrades()
+	{
+		appliedUpgrades.Clear();
+	}
 
 	public float GetStaticStat(Stat statName)
 	{
@@ -20,8 +35,8 @@ public class Stats : ScriptableObject
 	
 	public float GetDynamicStat(Stat statName)
 	{
-		if (dynamicStats.TryGetValue(statName, out float value))
-			return value;
+		if (dynamicStats.TryGetValue(statName, out float baseValue))
+			return GetUpgradedValue(statName, baseValue);
 		else
 		{
 			Debug.LogError($"No DYNAMIC stat value found for {statName} on {this.name}");
@@ -39,6 +54,22 @@ public class Stats : ScriptableObject
 		{
 			Debug.LogError($"No DYNAMIC stat value found for {statName} on {this.name}");
 		}
+	}
+
+	private float GetUpgradedValue(Stat stat, float baseValue)
+	{
+		foreach (StatsUpgrade upgrade in appliedUpgrades)
+		{
+			if (!upgrade.affectedStats.TryGetValue(stat, out float upgradeValue))
+				continue;
+			
+			if (upgrade.isPercentageUpgrade)
+				baseValue *= 1f + (upgradeValue / 100f);
+			else
+				baseValue += upgradeValue;
+		}
+
+		return baseValue;
 	}
 }
 

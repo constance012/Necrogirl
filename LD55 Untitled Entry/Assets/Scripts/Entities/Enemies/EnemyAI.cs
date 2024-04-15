@@ -7,22 +7,22 @@ public class EnemyAI : EntityAI
 	[SerializeField] private float spotTimer;
 
 	// Private fields.
-	private Vector2 _targetPreviousPos;
 	private bool _spottedPlayer;
 	private float _spotTimer;
 
 	protected override void Start()
 	{
 		base.Start();
-
-		_targetPreviousPos = PlayerMovement.Position;
 		_spotTimer = spotTimer;
 	}
 
     protected override void FixedUpdate()
     {
+		if (PlayerStats.IsDeath)
+			return;
+
 		SpotPlayer();
-        base.FixedUpdate();
+        
     }
 
     private void SpotPlayer()
@@ -42,6 +42,15 @@ public class EnemyAI : EntityAI
 				_spotTimer = spotTimer;
 
 			return;
+		}
+
+		animator.SetFloat("Speed", rb2D.velocity.sqrMagnitude);
+
+		// Request a path if the player has moved a certain distance fron the last position.
+		if ((PlayerMovement.Position - _targetPreviousPos).sqrMagnitude >= maxMovementDeltaSqr)
+		{
+			PathRequester.Request(transform.position, PlayerMovement.Position, OnPathFound);
+			_targetPreviousPos = PlayerMovement.Position;
 		}
     }
 

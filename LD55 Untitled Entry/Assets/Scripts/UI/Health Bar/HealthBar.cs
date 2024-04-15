@@ -66,9 +66,10 @@ public class HealthBar : MonoBehaviour
 	{
 		mainSlider.maxValue = max;
 		fxSlider.maxValue = max;
-		
+	
 		if (initialize)
 		{
+			_mainFillRect.color = healthGradient.Evaluate(mainSlider.normalizedValue);
 			mainSlider.value = max;
 			fxSlider.value = max;
 			displayText.text = $"{max:0} / {max:0}";

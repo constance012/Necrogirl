@@ -4,14 +4,21 @@ public class MeleeUnit : UnitStats
 {
     private void LateUpdate()
 	{
-		int hitColliders = Physics2D.OverlapBox(transform.position, attackRange, 0f, _contactFilter, _hitObjects);
+		_attackInterval -= Time.deltaTime;
 
-		for (int i = 0; i < hitColliders; i++)
+		if (_attackInterval <= 0f)
 		{
-			EnemyStats enemy = _hitObjects[i].GetComponentInParent<EnemyStats>();
+			int hitColliders = Physics2D.OverlapBox(transform.position, attackRange, 0f, _contactFilter, _hitObjects);
 
-			if (enemy != null)
-				enemy.TakeDamage(stats.GetDynamicStat(Stat.Damage), false, transform.position, stats.GetStaticStat(Stat.KnockBackStrength));
+			for (int i = 0; i < hitColliders; i++)
+			{
+				EnemyStats enemy = _hitObjects[i].GetComponentInParent<EnemyStats>();
+
+				if (enemy != null)
+					enemy.TakeDamage(stats.GetDynamicStat(Stat.Damage), false, transform.position, stats.GetStaticStat(Stat.KnockBackStrength));
+			}
+
+			_attackInterval = 1f / stats.GetDynamicStat(Stat.AttackSpeed);
 		}
 	}
 }

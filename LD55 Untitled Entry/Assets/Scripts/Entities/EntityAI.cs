@@ -1,24 +1,27 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EntityAI : MonoBehaviour
+public class EntityAI : Seeker
 {
     [Header("References"), Space]
     [SerializeField] protected Rigidbody2D rb2D;
 	[SerializeField] protected Animator animator;
+	[SerializeField] protected Stats stats;
 
     [Header("Mobility Settings"), Space]
-    [SerializeField] protected float moveSpeed;
 	[SerializeField] private float repelRange;
 	[SerializeField] private float repelAmplitude;
 
     // Protected fields.
     protected static HashSet<Rigidbody2D> _nearbyEntity;
+	protected Vector2 _targetPreviousPos;
     protected bool _facingRight = true;
 
     protected virtual void Start()
     {
         _nearbyEntity ??= new HashSet<Rigidbody2D>();
+		_targetPreviousPos = PlayerMovement.Position;
     }
 
     private void OnDestroy()
@@ -31,22 +34,56 @@ public class EntityAI : MonoBehaviour
 		if (PlayerStats.IsDeath)
 		 	return;
 		
-		Vector2 direction = PlayerMovement.Position - rb2D.position;
 		animator.SetFloat("Speed", rb2D.velocity.sqrMagnitude);
 
-		if (direction.sqrMagnitude >= 1f)
+		// Request a path if the player has moved a certain distance fron the last position.
+		if ((PlayerMovement.Position - _targetPreviousPos).sqrMagnitude >= maxMovementDeltaSqr)
 		{
+			PathRequester.Request(transform.position, PlayerMovement.Position, OnPathFound);
+			_targetPreviousPos = PlayerMovement.Position;
+		}
+	}
+
+    protected override IEnumerator FollowPath(int previousIndex = -1)
+    {
+        if (_path.Length == 0)
+			yield break;
+
+		Vector2 currentWaypoint = previousIndex == -1 ? _path[0] : _path[previousIndex];
+
+		Debug.Log($"{gameObject.name} following path...");
+
+		while (true)
+		{
+			float distanceToCurrent = Vector2.Distance(rb2D.position, currentWaypoint);
+
+			if (distanceToCurrent < .05f)
+			{
+				_waypointIndex++;
+
+				// If there's no more waypoints to move, then simply returns out of the coroutine.
+				if (_waypointIndex >= _path.Length)
+				{
+					_waypointIndex = 0;
+					_path = new Vector3[0];
+					yield break;
+				}
+
+				currentWaypoint = _path[_waypointIndex];
+			}
+
+			Vector2 direction = (currentWaypoint - rb2D.position).normalized;
 			Vector2 velocity = CalculateVelocity(direction);
 
 			CheckFlip();
 
 			rb2D.velocity = velocity;
-		}
-		else
-			rb2D.velocity = Vector3.zero;
-	}
 
-	private void CheckFlip()
+			yield return new WaitForFixedUpdate();
+		}
+    }
+
+    private void CheckFlip()
 	{
 		float sign = Mathf.Sign(PlayerMovement.Position.x - rb2D.position.x);
 		bool mustFlip = (_facingRight && sign < 0f) || (!_facingRight && sign > 0f);
@@ -80,7 +117,7 @@ public class EntityAI : MonoBehaviour
 			}
 		}
 
-		Vector2 velocity = direction.normalized * moveSpeed;
+		Vector2 velocity = direction * stats.GetDynamicStat(Stat.MoveSpeed);
 		velocity += repelForce.normalized * repelAmplitude;
 
 		return velocity;

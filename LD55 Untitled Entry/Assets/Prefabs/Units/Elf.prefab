@@ -68,6 +68,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Elf
       objectReference: {fileID: 0}
+    - target: {fileID: 7935642385781397333, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
+      propertyPath: stats
+      value: 
+      objectReference: {fileID: 11400000, guid: 71d217be4f936a14b916639d1b05e667, type: 2}
     - target: {fileID: 9158658517444621339, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
       propertyPath: stats
       value: 
