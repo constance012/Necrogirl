@@ -22,11 +22,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4038556098368311010, guid: 5ca1749e49554ee41817349ecf77e00d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -32.57096
       objectReference: {fileID: 0}
     - target: {fileID: 4038556098368311010, guid: 5ca1749e49554ee41817349ecf77e00d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -4.025887
       objectReference: {fileID: 0}
     - target: {fileID: 4038556098368311010, guid: 5ca1749e49554ee41817349ecf77e00d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -146,7 +146,7 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: 10b47558c755c5449b5bfe3685e76637, type: 2}
   repelRange: 1.5
   repelAmplitude: 3
-  aggroRange: 20
+  aggroRange: 11
   spotTimer: 1
   spotLayer:
     serializedVersion: 2

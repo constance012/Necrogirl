@@ -23,7 +23,7 @@ MonoBehaviour:
   dynamicStats:
     _serializedList:
     - Key: 0
-      Value: 10
+      Value: 12
     - Key: 2
       Value: 4
     - Key: 3

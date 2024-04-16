@@ -1,0 +1,159 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &267165073157578597
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 662749350947096206}
+  m_Layer: 0
+  m_Name: Music
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &662749350947096206
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 267165073157578597}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4937339068355932229}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &272945597423184887
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3569443728544646970}
+  m_Layer: 0
+  m_Name: Sound
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3569443728544646970
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272945597423184887}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4937339068355932229}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7443391904408510483
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4937339068355932229}
+  - component: {fileID: 4550301215723064343}
+  m_Layer: 0
+  m_Name: Audio Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4937339068355932229
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7443391904408510483}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3569443728544646970}
+  - {fileID: 662749350947096206}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4550301215723064343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7443391904408510483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77eda1d835d438c45b31c9647e1eb4f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioArray:
+  - name: Main Theme
+    audioType: 1
+    clips:
+    - {fileID: 8300000, guid: e03065809a0e11345936b30e6ca5b1fe, type: 3}
+    mixerGroup: {fileID: 1569801678915969931, guid: 362e8dc3a3dc4854ebebe0f835e7c79a, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Ambience Noise
+    audioType: 0
+    clips:
+    - {fileID: 8300000, guid: 58c95c0644dea3a468a26c3a5841a4a2, type: 3}
+    mixerGroup: {fileID: 5247730839009252975, guid: 362e8dc3a3dc4854ebebe0f835e7c79a, type: 2}
+    volume: 0.4
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Taking Damage
+    audioType: 0
+    clips:
+    - {fileID: 8300000, guid: 95e0703f66fcb864e9374af0516a6333, type: 3}
+    - {fileID: 8300000, guid: 9a873df3f4b1f034288369271b9e66b6, type: 3}
+    - {fileID: 8300000, guid: d2f6df6dddd4a9d44885ee72075aa243, type: 3}
+    mixerGroup: {fileID: 5247730839009252975, guid: 362e8dc3a3dc4854ebebe0f835e7c79a, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Pickup
+    audioType: 0
+    clips:
+    - {fileID: 8300000, guid: e912abd49bcb3ec44b2a1b6579c0957d, type: 3}
+    - {fileID: 8300000, guid: cf0a91995a0c38e4ab39765d898f8a6b, type: 3}
+    mixerGroup: {fileID: 5247730839009252975, guid: 362e8dc3a3dc4854ebebe0f835e7c79a, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Dialogue Typing
+    audioType: 0
+    clips:
+    - {fileID: 8300000, guid: 50673466305de534797e0a3f4dd6ce58, type: 3}
+    mixerGroup: {fileID: 5247730839009252975, guid: 362e8dc3a3dc4854ebebe0f835e7c79a, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}

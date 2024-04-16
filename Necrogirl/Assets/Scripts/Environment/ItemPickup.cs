@@ -3,9 +3,16 @@ using UnityEngine;
 public class ItemPickup : Interactable
 {
 	[Header("Current Item Info"), Space]
-
 	[Tooltip("The scriptable object represents this item.")]
 	public Item itemSO;
+
+	[Header("Fly Settings"), Space]
+	[SerializeField] private Rigidbody2D rb2D;
+	[SerializeField] protected float flyDistance;
+	[SerializeField] private float flySpeed;
+	[SerializeField] private float pickUpMinDistance;
+	[SerializeField] private float pickUpFailDelay;
+
 	public int ItemQuantity
 	{
 		get { return _currentItem.quantity; }
@@ -15,6 +22,7 @@ public class ItemPickup : Interactable
 	// Private fields.
 	private Item _currentItem;
 	private int _overrideQuantity = -1;
+	private float _delay;
 
 	private void Start()
 	{
@@ -29,35 +37,32 @@ public class ItemPickup : Interactable
 
 	protected override void CheckForInteraction(float mouseDistance, float playerDistance)
 	{
-		if (playerDistance <= interactDistance)
+		if (playerDistance <= flyDistance)
+			FlyTowardsPlayer();
+
+		base.CheckForInteraction(mouseDistance, playerDistance);
+	}
+
+    protected override void TriggerInteraction(float playerDistance)
+    {
+        base.TriggerInteraction(playerDistance);
+
+		if (InputManager.Instance.GetKeyDown(KeybindingActions.Interact) && _delay > 0f)
+			TryPickup(true);
+    }
+
+    private void FlyTowardsPlayer()
+	{
+		_delay -= Time.deltaTime;
+
+		if (_delay <= 0f)
 		{
-			TriggerInteraction(playerDistance);
+			Vector2 flyDirection = (player.position - transform.position).normalized;
+			rb2D.velocity = flyDirection * flySpeed;
+
+			if (Vector3.Distance(transform.position, player.position) <= pickUpMinDistance)
+				TryPickup();
 		}
-		else
-		{
-			CancelInteraction(playerDistance);
-		}
-
-	}
-
-	protected override void TriggerInteraction(float playerDistance)
-	{
-		base.TriggerInteraction(playerDistance);
-
-		if (InputManager.Instance.GetKeyDown(KeybindingActions.Interact))
-			Interact();
-	}
-
-	public override void Interact()
-	{
-		base.Interact();
-
-		Pickup();
-	}
-
-	public override void ExecuteRemoteLogic(bool state)
-	{
-		
 	}
 
 	protected override void CreatePopupLabel()
@@ -85,14 +90,26 @@ public class ItemPickup : Interactable
 		}
 	}
 
-	private void Pickup()
+	private void TryPickup(bool forced = false)
 	{
 		Debug.Log("You're picking up a(n) " + _currentItem.itemName);
 
-		Destroy(clone.gameObject);
-
-		GameManager.Instance.AddItem(_currentItem);
-
-		Destroy(gameObject);
+		if (ItemsManager.Instance.AddItem(_currentItem, forced))
+		{
+			Destroy(clone.gameObject);
+			Destroy(gameObject);
+		}
+		else
+		{
+			_delay = pickUpFailDelay;
+		}
 	}
+
+    protected override void OnDrawGizmosSelected()
+    {
+        base.OnDrawGizmosSelected();
+
+		Gizmos.color = Color.white;
+		Gizmos.DrawWireSphere(transform.position, flyDistance);
+    }
 }

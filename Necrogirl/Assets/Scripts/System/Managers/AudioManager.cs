@@ -27,7 +27,6 @@ public class AudioManager : PersistentSingleton<AudioManager>
 	private void Start()
 	{
 		Play("Main Theme");
-		Play("Ambience Noise");
 	}
 
 	/// <summary>
@@ -85,6 +84,17 @@ public class AudioManager : PersistentSingleton<AudioManager>
 		chosenAudio.source.pitch = UnityEngine.Random.Range(min, max);
 
 		chosenAudio.source.Play();
+	}
+
+	public void Stop(string audioName)
+	{
+		if (!TryGetAudio(out Audio chosenAudio, audioName))
+		{
+			Debug.LogWarning($"Audio Clip: {audioName} could not be found!!");
+			return;
+		}
+
+		chosenAudio.source.Stop();
 	}
 
 	public void SetVolume(string audioName, float newVolume, bool resetToDefault = false)

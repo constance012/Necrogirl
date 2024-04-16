@@ -10,6 +10,7 @@ public class PlayerStats : EntityStats
 
 	public static bool IsDeath { get; set; }
 	public float CurrentMana => _currentMana;
+	public float MaxMana => stats.GetDynamicStat(Stat.MaxMana);
 	public bool IsAlive => _currentHealth > 0f;
 
 	// Private fields
@@ -41,6 +42,9 @@ public class PlayerStats : EntityStats
 
 	private void Update()
 	{
+		if (GameManager.Instance.GameFinished)
+			return;
+
 		if (_invincibilityTime > 0f)
 			_invincibilityTime -= Time.deltaTime;
 

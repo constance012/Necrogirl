@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "LD55 Untitled Entry.sln"
+    "dotnet.defaultSolution": "Necrogirl.sln"
 }

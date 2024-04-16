@@ -13,21 +13,23 @@ public class Consumable : Item
 	public HealingType healingType;
 	public int healingAmount;
 
-	public override bool Use()
+	public override bool Use(bool forced = false)
 	{
-		Debug.Log("Using " + itemName);
-
 		if (quantity > 0)
 		{
 			PlayerStats player = GameObject.FindWithTag("Player").GetComponent<PlayerStats>();
 
 			if (healingType == HealingType.Health)
+			{
 				player.Heal(healingAmount);
-			else
+				quantity--;
+				return true;
+			}
+			else if (player.CurrentMana < player.MaxMana || forced)
+			{
 				player.RecoverMana(healingAmount);
-
-			quantity--;
-			return true;
+				return true;
+			}
 		}
 
 		return false;

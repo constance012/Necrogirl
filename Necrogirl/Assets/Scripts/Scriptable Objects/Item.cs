@@ -53,7 +53,7 @@ public class Item : ScriptableObject
 	public bool isDefaultItem;
 	public bool canBeUsed;
 
-	public virtual bool Use()
+	public virtual bool Use(bool forced = false)
 	{
 		Debug.Log("Using " + itemName);
 		return true;

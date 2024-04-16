@@ -7,6 +7,7 @@ public class SettingsMenu : MonoBehaviour
 {
 	[Header("Audio Mixer"), Space]
 	[SerializeField] private AudioMixer mixer;
+	[SerializeField] private bool closeOnStart;
 
 	[Header("UI References"), Space]
 	[SerializeField] private Slider _masterSlider;
@@ -27,13 +28,18 @@ public class SettingsMenu : MonoBehaviour
 
 	private void Start()
 	{
-		ReloadUI();
+		if (closeOnStart)
+		{
+			ReloadUI();
+			gameObject.SetActive(false);
+		}
 	}
 
 	#region Callback Method for UI.
 	public void SetMasterVolume(float amount)
 	{
-		mixer.SetFloat("masterVol", amount);
+		float volume = Mathf.Log10(amount) * 20f;
+		mixer.SetFloat("masterVol", volume);
 
 		_masterText.text = $"Master: {ConvertDecibelToText(amount)}";
 		UserSettings.MasterVolume = amount;
@@ -41,7 +47,8 @@ public class SettingsMenu : MonoBehaviour
 
 	public void SetMusicVolume(float amount)
 	{
-		mixer.SetFloat("musicVol", amount);
+		float volume = Mathf.Log10(amount) * 20f;
+		mixer.SetFloat("musicVol", volume);
 
 		_musicText.text = $"Music: {ConvertDecibelToText(amount)}";
 		UserSettings.MusicVolume = amount;
@@ -49,7 +56,8 @@ public class SettingsMenu : MonoBehaviour
 
 	public void SetSoundsVolume(float amount)
 	{
-		mixer.SetFloat("soundsVol", amount);
+		float volume = Mathf.Log10(amount) * 20f;
+		mixer.SetFloat("soundsVol", volume);
 
 		_soundsText.text = $"Sound: {ConvertDecibelToText(amount)}";
 		UserSettings.SoundsVolume = amount;
@@ -70,11 +78,10 @@ public class SettingsMenu : MonoBehaviour
 
 	private string ConvertDecibelToText(float amount)
 	{
-		float normalized = 1f - (Mathf.Abs(amount) / 80f);
-		return (normalized * 100f).ToString("0");
+		return (amount * 100f).ToString("0");
 	}
 
-	private void ReloadUI()
+	public void ReloadUI()
 	{
 		float masterVol = UserSettings.MasterVolume;
 		float musicVol = UserSettings.MusicVolume;

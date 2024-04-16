@@ -22,7 +22,7 @@ public abstract class Seeker : MonoBehaviour
 		if (seekOnStart)
 		{
 			yield return new WaitForSeconds(.1f);
-			PathRequester.Request(transform.position, target.position, OnPathFound);
+			PathRequester.Request(transform.position, target.position, this.gameObject, OnPathFound);
 		}
 	}
 
@@ -35,12 +35,12 @@ public abstract class Seeker : MonoBehaviour
 
 	protected void OnPathFound(Vector3[] newPath, bool pathFound)
 	{
-		// Only start following the found path if this gameobject has not been destroyed yet.
-		if (gameObject == null || target == null)
-			return;
-
 		if (pathFound)
 		{
+			// Only start following the found path if this gameobject has not been destroyed yet.
+			if (gameObject == null)
+				return;
+
 			_path = newPath;
 			_waypointIndex = 0;
 

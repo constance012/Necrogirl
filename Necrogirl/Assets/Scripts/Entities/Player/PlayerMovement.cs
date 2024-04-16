@@ -20,6 +20,9 @@ public class PlayerMovement : MonoBehaviour
 
 	private void Update()
 	{
+		if (GameManager.Instance.GameFinished)
+			return;
+
 		_movementDirection.x = InputManager.Instance.GetAxisRaw("Horizontal");
 		_movementDirection.y = InputManager.Instance.GetAxisRaw("Vertical");
 		_movementDirection.Normalize();

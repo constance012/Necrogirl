@@ -70,12 +70,9 @@ public abstract class Interactable : MonoBehaviour
 		if (type == InteractableType.Passive)
 			return;
 
-		Vector2 worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-		float mouseDistance = Vector2.Distance(worldMousePos, transform.position);
 		float playerDistance = Vector2.Distance(player.position, transform.position);
 
-		CheckForInteraction(mouseDistance, playerDistance);
+		CheckForInteraction(0f, playerDistance);
 	}
 
 	public virtual void Interact()
@@ -105,7 +102,6 @@ public abstract class Interactable : MonoBehaviour
 		{
 			TriggerInteraction(playerDistance);
 		}
-
 		else
 		{
 			CancelInteraction(playerDistance);

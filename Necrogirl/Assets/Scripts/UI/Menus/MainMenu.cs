@@ -25,6 +25,7 @@ public class MainMenu : MonoBehaviour
 	public void StartGame()
 	{
 		SceneManager.LoadSceneAsync("Scenes/Main Game");
+		AudioManager.Instance.Play("Ambience Noise");
 		//GameDataManager.Instance.LoadGame(false);
 	}
 
@@ -38,8 +39,8 @@ public class MainMenu : MonoBehaviour
 	{
 		Debug.Log("Initializing settings internally...");
 
-		mixer.SetFloat("masterVol", UserSettings.MasterVolume);
-		mixer.SetFloat("musicVol", UserSettings.MusicVolume);
-		mixer.SetFloat("soundsVol", UserSettings.SoundsVolume);
+		mixer.SetFloat("masterVol", Mathf.Log10(UserSettings.MasterVolume) * 20f);
+		mixer.SetFloat("musicVol", Mathf.Log10(UserSettings.MusicVolume) * 20f);
+		mixer.SetFloat("soundsVol", Mathf.Log10(UserSettings.SoundsVolume) * 20f);
 	}
 }

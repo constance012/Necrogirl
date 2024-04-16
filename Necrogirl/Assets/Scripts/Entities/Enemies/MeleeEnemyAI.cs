@@ -40,8 +40,9 @@ public class MeleeEnemyAI : EntityAI
 		}
 
 		animator.SetFloat("Speed", rb2D.velocity.sqrMagnitude);
-		SelectTarget();
-		FollowTarget();
+		
+		if (TrySelectTarget())
+			FollowTarget();
 	}
 
 	public void Alert()

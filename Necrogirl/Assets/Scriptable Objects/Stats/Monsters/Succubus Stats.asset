@@ -23,13 +23,13 @@ MonoBehaviour:
     - Key: 9
       Value: 8
     - Key: 10
-      Value: 40
+      Value: 30
     - Key: 11
       Value: 5
   dynamicStats:
     _serializedList:
     - Key: 0
-      Value: 12
+      Value: 16
     - Key: 2
       Value: 5
     - Key: 3

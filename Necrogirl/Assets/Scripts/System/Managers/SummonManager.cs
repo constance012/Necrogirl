@@ -27,6 +27,9 @@ public class SummonManager : Singleton<SummonManager>
 
 	private void Update()
 	{
+		if (GameManager.Instance.GameFinished)
+			return;
+
 		_cooldown -= Time.deltaTime;
 
 		if (Input.anyKeyDown && _cooldown <= 0f)

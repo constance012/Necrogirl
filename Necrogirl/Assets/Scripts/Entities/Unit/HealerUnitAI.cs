@@ -13,7 +13,7 @@ public class HealerUnitAI : EntityAI
 		// Request a path if the target has moved a certain distance fron the last position.
 		if (Vector3.Distance(PlayerMovement.Position, _targetPreviousPos) >= maxMovementDelta)
 		{
-			PathRequester.Request(transform.position, PlayerMovement.Position, OnPathFound);
+			PathRequester.Request(transform.position, PlayerMovement.Position, this.gameObject, OnPathFound);
 			_targetPreviousPos = PlayerMovement.Position;
 		}
 	}

@@ -18,11 +18,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4038556098368311010, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -32.97
       objectReference: {fileID: 0}
     - target: {fileID: 4038556098368311010, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.85
       objectReference: {fileID: 0}
     - target: {fileID: 4038556098368311010, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -151,9 +151,9 @@ MonoBehaviour:
   rb2D: {fileID: 6053901303285279476}
   animator: {fileID: 6997130681893881835}
   stats: {fileID: 11400000, guid: 71d217be4f936a14b916639d1b05e667, type: 2}
-  repelRange: 10
+  repelRange: 1.5
   repelAmplitude: 3
-  aggroRange: 30
+  aggroRange: 16.2
   spotTimer: 0.5
   spotLayer:
     serializedVersion: 2
@@ -179,7 +179,7 @@ MonoBehaviour:
   damageFlashTime: 0.2
   priority: 1
   deathEffect: {fileID: 8785179139041795559, guid: 90f8049227c718b45a849b688c69c3e4, type: 3}
-  attackRange: {x: 20, y: 20}
+  attackRange: {x: 13.5, y: 13.5}
   hitLayer:
     serializedVersion: 2
     m_Bits: 64

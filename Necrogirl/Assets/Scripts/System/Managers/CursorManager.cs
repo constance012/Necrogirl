@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public enum CursorTextureType { Default, Crosshair }
+public enum CursorTextureType { Default, Clicked }
 
 public class CursorManager : Singleton<CursorManager>
 {
@@ -20,14 +20,17 @@ public class CursorManager : Singleton<CursorManager>
 
 	[Header("Custom Cursors"), Space]
 	[SerializeField] private CustomCursor defaultCursor;
-	[SerializeField] private CustomCursor crosshairCursor;
-	
-	private void Start()
+	[SerializeField] private CustomCursor onClickedCursor;
+
+	private void Update()
 	{
-		SwitchCursorTexture(CursorTextureType.Default);
+		if (InputManager.Instance.GetKey(KeybindingActions.PrimaryAttack))
+			SwitchCursorTexture(CursorTextureType.Clicked);
+		else
+			SwitchCursorTexture(CursorTextureType.Default);
 	}
 
-	public void SwitchCursorTexture(CursorTextureType type, CursorMode mode = CursorMode.Auto)
+	public void SwitchCursorTexture(CursorTextureType type, CursorMode mode = CursorMode.ForceSoftware)
 	{
 		switch (type)
 		{
@@ -35,8 +38,8 @@ public class CursorManager : Singleton<CursorManager>
 				Cursor.SetCursor(defaultCursor.texture, defaultCursor.TextureHotSpot, mode);
 				break;
 
-			case CursorTextureType.Crosshair:
-				Cursor.SetCursor(crosshairCursor.texture, crosshairCursor.TextureHotSpot, mode);
+			case CursorTextureType.Clicked:
+				Cursor.SetCursor(onClickedCursor.texture, onClickedCursor.TextureHotSpot, mode);
 				break;
 		}
 	}

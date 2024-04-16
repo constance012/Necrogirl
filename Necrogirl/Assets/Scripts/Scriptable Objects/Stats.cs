@@ -1,6 +1,7 @@
 using UnityEngine;
 using AYellowpaper.SerializedCollections;
 using System.Collections.Generic;
+using CSTGames.Utility;
 
 [CreateAssetMenu(menuName = "Unit Stats", fileName = "New Blank Stats")]
 public class Stats : ScriptableObject
@@ -77,12 +78,12 @@ public class Stats : ScriptableObject
         string result = "";
 		foreach (KeyValuePair<Stat, float> stat in dynamicStats)
 		{
-			result += $"{stat.Key}: {stat.Value}\n";
+			result += $"{stat.Key.ToString().AddWhitespaceBeforeCapital()}: {stat.Value}\n";
 		}
 		result += "\n";
 		foreach (KeyValuePair<Stat, float> stat in staticStats)
 		{
-			result += $"{stat.Key}: {stat.Value}\n";
+			result += $"{stat.Key.ToString().AddWhitespaceBeforeCapital()}: {stat.Value}\n";
 		}
 		return result.TrimEnd('\r', '\n');
     }

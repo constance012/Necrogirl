@@ -14,16 +14,18 @@ public class PathRequester : Singleton<PathRequester>
 
 	private bool _isProcessingPath;
 
-	public static void Request(Vector3 start, Vector3 end, Action<Vector3[], bool> callback)
+	public static void Request(Vector3 start, Vector3 end, GameObject requester, Action<Vector3[], bool> callback)
 	{
-		PathRequestData newRequest = new PathRequestData(start, end, callback);
+		PathRequestData newRequest = new PathRequestData(start, end, requester, callback);
 		Instance._queue.Enqueue(newRequest);
 		Instance.TryProcessNext();
 	}
 	
 	public void InvokeCallback(Vector3[] path, bool success)
 	{
-		_currentRequest.callback(path, success);
+		if (_currentRequest.requester != null)
+			_currentRequest.callback(path, success);
+		
 		_isProcessingPath = false;
 
 		TryProcessNext();
@@ -53,12 +55,14 @@ public class PathRequester : Singleton<PathRequester>
 	{
 		public Vector3 pathStart;
 		public Vector3 pathEnd;
+		public GameObject requester;
 		public Action<Vector3[], bool> callback;
 
-		public PathRequestData(Vector3 start, Vector3 end, Action<Vector3[], bool> callback)
+		public PathRequestData(Vector3 start, Vector3 end, GameObject requester, Action<Vector3[], bool> callback)
 		{
 			this.pathStart = start;
 			this.pathEnd = end;
+			this.requester = requester;
 			this.callback = callback;
 		}
 	}

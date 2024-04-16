@@ -13,7 +13,6 @@ public enum KeybindingActions
 	MoveUp,
 	MoveDown,
 	Heal,
-	RecoverMana,
 	Inventory,
 	Interact,
 	Pause,

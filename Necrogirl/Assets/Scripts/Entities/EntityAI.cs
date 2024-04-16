@@ -48,8 +48,9 @@ public class EntityAI : Seeker
 		 	return;
 		
 		animator.SetFloat("Speed", rb2D.velocity.sqrMagnitude);
-		SelectTarget();
-		FollowTarget();
+		
+		if (TrySelectTarget())
+			FollowTarget();
 	}
 
 	protected virtual void FollowTarget()
@@ -57,12 +58,12 @@ public class EntityAI : Seeker
 		// Request a path if the target has moved a certain distance fron the last position.
 		if (Vector3.Distance(target.position, _targetPreviousPos) >= maxMovementDelta)
 		{
-			PathRequester.Request(transform.position, target.position, OnPathFound);
+			PathRequester.Request(transform.position, target.position, this.gameObject, OnPathFound);
 			_targetPreviousPos = target.position;
 		}
 	}
 
-	protected void SelectTarget()
+	protected bool TrySelectTarget()
 	{
 		int hitColliders = Physics2D.OverlapCircle(transform.position, aggroRange, _contactFilter, _hitTargets);
 
@@ -77,14 +78,17 @@ public class EntityAI : Seeker
 					_inAggroTargets.Add(entity);
 			}
 			
-			// Sort by priority.
+			// Sort by priority if the list is not empty.
 			if (_inAggroTargets.Count > 0)
 			{
 				_inAggroTargets.Sort();
 				target = _inAggroTargets[0].transform;
-				Debug.Log(target.name);
 			}
+
+			return _inAggroTargets.Count > 0;
 		} 
+
+		return false;
 	}
 
     protected override IEnumerator FollowPath(int previousIndex = -1)

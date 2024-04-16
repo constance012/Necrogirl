@@ -168,3 +168,8 @@ MonoBehaviour:
   interactDistance: 1
   hasInteracted: 0
   itemSO: {fileID: 0}
+  rb2D: {fileID: 6994718978722962409}
+  flyDistance: 4
+  flySpeed: 7
+  pickUpMinDistance: 0.5
+  pickUpFailDelay: 2
