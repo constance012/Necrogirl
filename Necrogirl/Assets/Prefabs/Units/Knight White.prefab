@@ -10,11 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4038556098368311010, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -32.6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4038556098368311010, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4038556098368311010, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -59,14 +59,14 @@ PrefabInstance:
     - target: {fileID: 5698158875652328317, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: b7d0bac5cfc2a034694b7922a8650c6e, type: 3}
+      objectReference: {fileID: 21300000, guid: cfd47be72131bf3499e3e72b329fadd6, type: 3}
     - target: {fileID: 5698158875652328317, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6431119970926788331, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
       propertyPath: m_Name
-      value: Knight
+      value: Knight White
       objectReference: {fileID: 0}
     - target: {fileID: 7285958529990537221, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
       propertyPath: m_AnchorMax.x
@@ -168,7 +168,7 @@ MonoBehaviour:
   dmgTextLoc: {fileID: 2417811803671844636}
   stats: {fileID: 11400000, guid: 8f906735cfc863b4fb0d6a3985cca268, type: 2}
   damageFlashTime: 0.2
-  priority: 2
+  priority: 1
   deathEffect: {fileID: 8785179139041795559, guid: 90f8049227c718b45a849b688c69c3e4, type: 3}
   attackRange: {x: 1.5, y: 1.5}
   hitLayer:

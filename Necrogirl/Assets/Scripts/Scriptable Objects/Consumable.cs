@@ -15,7 +15,7 @@ public class Consumable : Item
 
 	public override bool Use(bool forced = false)
 	{
-		if (quantity > 0)
+		if (quantity > 0 && canBeUsed)
 		{
 			PlayerStats player = GameObject.FindWithTag("Player").GetComponent<PlayerStats>();
 
@@ -31,6 +31,8 @@ public class Consumable : Item
 				return true;
 			}
 		}
+		else
+			Debug.LogWarning($"This {itemName} can not be used or its quantity is 0!!");
 
 		return false;
 	}

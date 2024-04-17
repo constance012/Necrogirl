@@ -36,25 +36,29 @@ public class ItemsManager : Singleton<ItemsManager>
 
     public bool AddItem(Item item, bool isForcedPickup = false)
 	{
+		if (item.autoUse)
+			return item.Use(isForcedPickup);
+		
 		switch(item.itemName)
 		{
 			case "Health Potion":
+				bool success = false;
 				if (_healthPotion == null)
+				{
 					_healthPotion = item;
-				else
-					_healthPotion.quantity += item.quantity;
+					success = true;
+				}
+				else if (_healthPotion.UpdateQuantity(item.quantity))
+					success = true;
 				
 				hpPotionCountText.text = _healthPotion.quantity.ToString();
-				return true;
-			
-			case "Mana Potion":
-				return item.Use(isForcedPickup);
+				return success;			
 			
 			case "Coin":
 				if (_coins == null)
 					_coins = item;
 				else
-					_coins.quantity += item.quantity;
+					_coins.UpdateQuantity(item.quantity);
 
 				coinText.text = _coins.quantity.ToString();
 				return true;

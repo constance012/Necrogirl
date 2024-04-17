@@ -10,21 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ea2b7a09fc2589449c2d3290107bb31, type: 3}
-  m_Name: Goblin Assasin Stats
+  m_Name: Elf Stats
   m_EditorClassIdentifier: 
   staticStats:
     _serializedList:
     - Key: 5
-      Value: 1.5
+      Value: 0.1
     - Key: 6
-      Value: 0.2
+      Value: 0.1
+    - Key: 7
+      Value: 10
+    - Key: 9
+      Value: 12
+    - Key: 10
+      Value: 20
+    - Key: 11
+      Value: 5
   dynamicStats:
     _serializedList:
     - Key: 0
-      Value: 7
+      Value: 150
     - Key: 2
-      Value: 2
+      Value: 25
     - Key: 3
-      Value: 1.5
+      Value: 1.2
     - Key: 4
-      Value: 6.5
+      Value: 5.3

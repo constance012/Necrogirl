@@ -10,11 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4038556098368311010, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -32.503586
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4038556098368311010, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.3228283
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4038556098368311010, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -139,7 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   seekOnStart: 0
   target: {fileID: 0}
-  maxMovementDelta: 0
+  maxMovementDelta: 0.5
   rb2D: {fileID: 6053901303285279476}
   animator: {fileID: 6997130681893881835}
   stats: {fileID: 11400000, guid: b1c88011226a40a44bd6552815592961, type: 2}
@@ -168,9 +168,9 @@ MonoBehaviour:
   dmgTextLoc: {fileID: 2417811803671844636}
   stats: {fileID: 11400000, guid: b1c88011226a40a44bd6552815592961, type: 2}
   damageFlashTime: 0.2
-  priority: 3
+  priority: 4
   deathEffect: {fileID: 8785179139041795559, guid: 90f8049227c718b45a849b688c69c3e4, type: 3}
-  attackRange: {x: 4, y: 4}
+  attackRange: {x: 12, y: 12}
   hitLayer:
     serializedVersion: 2
     m_Bits: 520

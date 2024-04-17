@@ -11,6 +11,14 @@ public class RangedUnitAI : EntityAI
 		_nearbyEntities.Add(this.rb2D);
 	}
 
+	protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
+
+		if (TrySelectTarget())
+			FollowTarget();
+    }
+
     protected override void FollowTarget()
     {
         if (target.gameObject.layer == LayerMask.NameToLayer("Player"))

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Cinemachine;
 using UnityEngine;
 
 public class EntityAI : Seeker
@@ -31,7 +30,7 @@ public class EntityAI : Seeker
     {
         _nearbyEntities ??= new HashSet<Rigidbody2D>();
 
-		_targetPreviousPos = PlayerMovement.Position;
+		_targetPreviousPos = transform.position;
 
 		_contactFilter.layerMask = spotLayer;
 		_contactFilter.useLayerMask = true;
@@ -48,9 +47,6 @@ public class EntityAI : Seeker
 		 	return;
 		
 		animator.SetFloat("Speed", rb2D.velocity.sqrMagnitude);
-		
-		if (TrySelectTarget())
-			FollowTarget();
 	}
 
 	protected virtual void FollowTarget()
@@ -83,6 +79,7 @@ public class EntityAI : Seeker
 			{
 				_inAggroTargets.Sort();
 				target = _inAggroTargets[0].transform;
+				Debug.Log(target.name);
 			}
 
 			return _inAggroTargets.Count > 0;
@@ -91,7 +88,7 @@ public class EntityAI : Seeker
 		return false;
 	}
 
-    protected override IEnumerator FollowPath(int previousIndex = -1)
+    protected override IEnumerator ExecuteFoundPath(int previousIndex = -1)
     {
         if (_path.Length == 0)
 			yield break;
@@ -104,13 +101,14 @@ public class EntityAI : Seeker
 		{
 			float distanceToCurrent = Vector2.Distance(rb2D.position, currentWaypoint);
 
-			if (distanceToCurrent < .05f)
+			if (distanceToCurrent <= .15f)
 			{
 				_waypointIndex++;
 
 				// If there's no more waypoints to move, then simply returns out of the coroutine.
 				if (_waypointIndex >= _path.Length)
 				{
+					Debug.Log("No waypoint left.");
 					_waypointIndex = 0;
 					_path = new Vector3[0];
 					rb2D.velocity = Vector2.zero;
@@ -154,14 +152,14 @@ public class EntityAI : Seeker
 		// Enemies will try to avoid each other.
 		Vector2 repelForce = Vector2.zero;
 
-		foreach (Rigidbody2D enemy in _nearbyEntities)
+		foreach (Rigidbody2D entity in _nearbyEntities)
 		{
-			if (enemy == rb2D)
+			if (entity == rb2D)
 				continue;
 
-			if (Vector2.Distance(enemy.position, rb2D.position) <= repelRange)
+			if (Vector2.Distance(entity.position, rb2D.position) <= repelRange)
 			{
-				Vector2 repelDirection = (rb2D.position - enemy.position).normalized;
+				Vector2 repelDirection = (rb2D.position - entity.position).normalized;
 				repelForce += repelDirection;
 			}
 		}

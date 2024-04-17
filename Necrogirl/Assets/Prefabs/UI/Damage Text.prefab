@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayText: {fileID: 7667534147120605057}
-  maxLifeTime: 1
+  maxLifeTime: 1.3
   maxVelocity: 2
   velocityCurve:
     serializedVersion: 2

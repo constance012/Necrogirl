@@ -30,7 +30,7 @@ public abstract class Seeker : MonoBehaviour
 	{
 		// Resume the previous coroutine if it hasn't finished yet.
 		if (!_finishedFollowingPath && _followCoroutine != null)
-			_followCoroutine = StartCoroutine(FollowPath(_waypointIndex));
+			_followCoroutine = StartCoroutine(ExecuteFoundPath(_waypointIndex));
 	}
 
 	protected void OnPathFound(Vector3[] newPath, bool pathFound)
@@ -47,11 +47,11 @@ public abstract class Seeker : MonoBehaviour
 			if (_followCoroutine != null)
 				StopCoroutine(_followCoroutine);
 			
-			_followCoroutine = StartCoroutine(FollowPath());
+			_followCoroutine = StartCoroutine(ExecuteFoundPath());
 		}
 	}
 
-	protected abstract IEnumerator FollowPath(int previousIndex = -1);
+	protected abstract IEnumerator ExecuteFoundPath(int previousIndex = -1);
 
 	private void OnDrawGizmos()
 	{

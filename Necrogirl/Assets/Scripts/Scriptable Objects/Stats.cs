@@ -6,11 +6,20 @@ using CSTGames.Utility;
 [CreateAssetMenu(menuName = "Unit Stats", fileName = "New Blank Stats")]
 public class Stats : ScriptableObject
 {
+	[Header("Stats"), Space]
 	public SerializedDictionary<Stat, float> staticStats = new SerializedDictionary<Stat, float>();
 	public SerializedDictionary<Stat, float> dynamicStats = new SerializedDictionary<Stat, float>();
 
 	// Private fields.
 	private List<StatsUpgrade> appliedUpgrades = new List<StatsUpgrade>();
+	private HashSet<Stat> toStringIgnoreStats = new HashSet<Stat>()
+	{
+		Stat.ManaCost,
+		Stat.LifeStealRatio,
+		Stat.ProjectileSpeed,
+		Stat.ProjectileLifeTime,
+		Stat.ProjectileTrackingRigidity,
+	};
 
 	public void AddUpgrade(StatsUpgrade upgrade)
 	{
@@ -78,12 +87,14 @@ public class Stats : ScriptableObject
         string result = "";
 		foreach (KeyValuePair<Stat, float> stat in dynamicStats)
 		{
-			result += $"{stat.Key.ToString().AddWhitespaceBeforeCapital()}: {stat.Value}\n";
+			if (!toStringIgnoreStats.Contains(stat.Key))
+				result += $"{stat.Key.ToString().AddWhitespaceBeforeCapital()}: {stat.Value}\n";
 		}
 		result += "\n";
 		foreach (KeyValuePair<Stat, float> stat in staticStats)
 		{
-			result += $"{stat.Key.ToString().AddWhitespaceBeforeCapital()}: {stat.Value}\n";
+			if (!toStringIgnoreStats.Contains(stat.Key))
+				result += $"{stat.Key.ToString().AddWhitespaceBeforeCapital()}: {stat.Value}\n";
 		}
 		return result.TrimEnd('\r', '\n');
     }

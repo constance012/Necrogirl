@@ -103,7 +103,7 @@ Rigidbody2D:
   m_LinearDrag: 3
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 6200000, guid: 47d085251a0621d42a2b08d5aba8d802, type: 2}
+  m_Material: {fileID: 6200000, guid: 8521e96dde48a7045a748300fa4f32d9, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -168,8 +168,9 @@ MonoBehaviour:
   interactDistance: 1
   hasInteracted: 0
   itemSO: {fileID: 0}
+  damageTextPrefab: {fileID: 1002002582291494483, guid: 5f49446ecb806b547a91c345d9b6b407, type: 3}
   rb2D: {fileID: 6994718978722962409}
-  flyDistance: 4
+  flyDistance: 3.5
   flySpeed: 7
   pickUpMinDistance: 0.5
   pickUpFailDelay: 2

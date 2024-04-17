@@ -12,7 +12,7 @@ namespace CSTGames.DataPersistence
 
 		public int slotIndex;
 		public int quantity;
-		public bool isFavorite;
+		//public bool isFavorite;
 
 		public ItemSaveData(Item itemToSave)
 		{
@@ -22,7 +22,7 @@ namespace CSTGames.DataPersistence
 
 			this.slotIndex = itemToSave.slotIndex;
 			this.quantity = itemToSave.quantity;
-			this.isFavorite = itemToSave.isFavorite;
+			//this.isFavorite = itemToSave.isFavorite;
 		}
 	}
 

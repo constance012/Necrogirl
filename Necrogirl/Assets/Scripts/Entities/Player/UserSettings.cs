@@ -8,19 +8,19 @@ public static class UserSettings
 	#region Audio Settings
 	public static float MasterVolume
 	{
-		get { return PlayerPrefs.GetFloat("MasterVolume", 0f); }
+		get { return PlayerPrefs.GetFloat("MasterVolume", 1f); }
 		set { PlayerPrefs.SetFloat("MasterVolume", value); }
 	}
 
 	public static float MusicVolume
 	{
-		get { return PlayerPrefs.GetFloat("MusicVolume", 0f); }
+		get { return PlayerPrefs.GetFloat("MusicVolume", 1f); }
 		set { PlayerPrefs.SetFloat("MusicVolume", value); }
 	}
 
 	public static float SoundsVolume
 	{
-		get { return PlayerPrefs.GetFloat("SoundsVolume", 0f); }
+		get { return PlayerPrefs.GetFloat("SoundsVolume", 1f); }
 		set { PlayerPrefs.SetFloat("SoundsVolume", value); }
 	}
 	#endregion

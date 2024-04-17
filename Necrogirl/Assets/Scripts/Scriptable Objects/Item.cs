@@ -27,9 +27,7 @@ public class Item : ScriptableObject
 
 	[HideInInspector] public string id;
 	
-	[Header("General")]
-	[Space]
-
+	[Header("General"), Space]
 	[ReadOnly] public int slotIndex = -1;
 	public ItemCategory category;
 
@@ -39,24 +37,26 @@ public class Item : ScriptableObject
 	public Sprite icon;
 	public Rarity rarity;
 
-	[Header("Quantity and Stack")]
-	[Space]
-
+	[Header("Quantity and Stack"), Space]
 	public bool stackable;
 	public int maxPerStack = 1;
 	public int quantity = 1;
 
-	[Header("Specials")]
-	[Space]
-
-	public bool isFavorite;
-	public bool isDefaultItem;
+	[Header("Specials"), Space]
 	public bool canBeUsed;
+	public bool autoUse;
+
+	public bool UpdateQuantity(int delta)
+	{
+		int unclamp = quantity + delta;
+		quantity = Mathf.Clamp(unclamp, 0, maxPerStack);
+		return  unclamp <= maxPerStack;
+	}
 
 	public virtual bool Use(bool forced = false)
 	{
 		Debug.Log("Using " + itemName);
-		return true;
+		return canBeUsed;
 	}
 
 	public override string ToString()
@@ -74,7 +74,6 @@ public class Item : ScriptableObject
 
 		this.slotIndex = saveData.slotIndex;
 		this.quantity = saveData.quantity;
-		this.isFavorite = saveData.isFavorite;
 	}
 }
 

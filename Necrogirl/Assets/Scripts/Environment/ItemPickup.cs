@@ -6,8 +6,11 @@ public class ItemPickup : Interactable
 	[Tooltip("The scriptable object represents this item.")]
 	public Item itemSO;
 
-	[Header("Fly Settings"), Space]
+	[Header("References"), Space]
+	[SerializeField] private GameObject damageTextPrefab;
 	[SerializeField] private Rigidbody2D rb2D;
+
+	[Header("Fly Settings"), Space]
 	[SerializeField] protected float flyDistance;
 	[SerializeField] private float flySpeed;
 	[SerializeField] private float pickUpMinDistance;
@@ -96,7 +99,15 @@ public class ItemPickup : Interactable
 
 		if (ItemsManager.Instance.AddItem(_currentItem, forced))
 		{
-			Destroy(clone.gameObject);
+			if (!_currentItem.autoUse)
+			{
+				string content = $"{_currentItem.itemName} +{_currentItem.quantity}";
+				DamageText.Generate(damageTextPrefab, transform.position + Vector3.up, _currentItem.rarity.color, DamageTextStyle.Normal, content);
+			}
+			
+			if (clone != null)
+				Destroy(clone.gameObject);
+				
 			Destroy(gameObject);
 		}
 		else

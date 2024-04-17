@@ -8,6 +8,13 @@ public class HealerUnitAI : EntityAI
 		_nearbyEntities.Add(this.rb2D);
 	}
 
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
+
+		FollowTarget();
+    }
+
     protected override void FollowTarget()
 	{
 		// Request a path if the target has moved a certain distance fron the last position.

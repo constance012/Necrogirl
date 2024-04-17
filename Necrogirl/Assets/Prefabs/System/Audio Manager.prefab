@@ -152,7 +152,7 @@ MonoBehaviour:
     audioType: 0
     clips:
     - {fileID: 8300000, guid: 50673466305de534797e0a3f4dd6ce58, type: 3}
-    mixerGroup: {fileID: 5247730839009252975, guid: 362e8dc3a3dc4854ebebe0f835e7c79a, type: 2}
+    mixerGroup: {fileID: 1423657532637384149, guid: 362e8dc3a3dc4854ebebe0f835e7c79a, type: 2}
     volume: 1
     pitch: 1
     loop: 0

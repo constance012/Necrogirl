@@ -10,23 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ea2b7a09fc2589449c2d3290107bb31, type: 3}
-  m_Name: Dwarf Stats
+  m_Name: Player Stats
   m_EditorClassIdentifier: 
   staticStats:
     _serializedList:
     - Key: 5
-      Value: 3
+      Value: 2
     - Key: 6
-      Value: 0.7
-    - Key: 7
-      Value: 6
+      Value: 0.2
+    - Key: 9
+      Value: 10
+    - Key: 10
+      Value: 30
+    - Key: 11
+      Value: 5
   dynamicStats:
     _serializedList:
     - Key: 0
-      Value: 50
+      Value: 100
+    - Key: 1
+      Value: 40
     - Key: 2
-      Value: 2
+      Value: 15
     - Key: 3
-      Value: 0.6
+      Value: 1.2
     - Key: 4
-      Value: 4
+      Value: 5.1

@@ -10,11 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4038556098368311010, guid: 5ca1749e49554ee41817349ecf77e00d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -32.79
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4038556098368311010, guid: 5ca1749e49554ee41817349ecf77e00d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.3269486
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4038556098368311010, guid: 5ca1749e49554ee41817349ecf77e00d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -141,7 +141,7 @@ MonoBehaviour:
   dmgTextLoc: {fileID: 8907454796238077921}
   stats: {fileID: 11400000, guid: 8549261ce51a62348b63d190d54749a8, type: 2}
   damageFlashTime: 0.2
-  priority: 4
+  priority: 5
   deathEffect: {fileID: 8785179139041795559, guid: 90f8049227c718b45a849b688c69c3e4, type: 3}
   attackRange: {x: 1.5, y: 1.5}
   hitLayer:

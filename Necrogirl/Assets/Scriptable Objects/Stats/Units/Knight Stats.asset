@@ -10,29 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ea2b7a09fc2589449c2d3290107bb31, type: 3}
-  m_Name: Succubus Stats
+  m_Name: Knight Stats
   m_EditorClassIdentifier: 
   staticStats:
     _serializedList:
     - Key: 5
-      Value: 2
+      Value: 1.5
     - Key: 6
-      Value: 0.3
-    - Key: 8
-      Value: 0.6
-    - Key: 9
-      Value: 8
-    - Key: 10
-      Value: 30
-    - Key: 11
-      Value: 5
+      Value: 0.4
+    - Key: 7
+      Value: 10
   dynamicStats:
     _serializedList:
     - Key: 0
-      Value: 16
+      Value: 170
     - Key: 2
-      Value: 5
+      Value: 20
     - Key: 3
       Value: 0.8
     - Key: 4
-      Value: 4.5
+      Value: 5

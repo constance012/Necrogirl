@@ -2,6 +2,13 @@ using UnityEngine;
 
 public class HealerUnit : UnitStats
 {
+    protected override void Start()
+    {
+        base.Start();
+
+		_hitObjects = new Collider2D[7];
+    }
+
     private void Update()
 	{
 		_attackInterval -= Time.deltaTime;

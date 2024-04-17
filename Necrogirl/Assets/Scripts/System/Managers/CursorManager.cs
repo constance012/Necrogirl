@@ -21,9 +21,13 @@ public class CursorManager : Singleton<CursorManager>
 	[Header("Custom Cursors"), Space]
 	[SerializeField] private CustomCursor defaultCursor;
 	[SerializeField] private CustomCursor onClickedCursor;
+	[SerializeField] private bool showInEditor;
 
 	private void Update()
 	{
+		if (Application.isEditor && !showInEditor)
+			return;
+
 		if (InputManager.Instance.GetKey(KeybindingActions.PrimaryAttack))
 			SwitchCursorTexture(CursorTextureType.Clicked);
 		else
