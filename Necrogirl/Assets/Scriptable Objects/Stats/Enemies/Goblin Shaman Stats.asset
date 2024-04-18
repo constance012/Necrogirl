@@ -18,19 +18,19 @@ MonoBehaviour:
       Value: 2
     - Key: 6
       Value: 0.4
-    - Key: 9
-      Value: 10
     - Key: 10
-      Value: 20
+      Value: 10
     - Key: 11
+      Value: 20
+    - Key: 12
       Value: 5
   dynamicStats:
     _serializedList:
     - Key: 0
-      Value: 80
+      Value: 100
     - Key: 2
       Value: 28
     - Key: 3
-      Value: 0.5
+      Value: 0.7
     - Key: 4
       Value: 5

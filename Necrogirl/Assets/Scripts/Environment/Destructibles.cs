@@ -8,20 +8,21 @@ public class Destructibles : MonoBehaviour
 	public GameObject hpBottle, manaBottle, Coin;
 
 	[Header("Drop Settings"), Space]
-	public Vector2Int coinCount;
+	[SerializeField] private Vector2Int coinCount;
+	[SerializeField, Range(0f, 1f)] private float manaDropChance;
+	[SerializeField, Range(0f, 1f)] private float healthDropChance;
 
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
 		if (collision.gameObject.layer == LayerMask.NameToLayer("Our Projectile"))
 		{
-			int randomHP = Random.Range(0, 101);
-			if(randomHP >= 0 && randomHP <= 50)
+			if(Random.value < healthDropChance)
 			{
 				GameObject healthPotion = Instantiate(hpBottle, transform.position + (Vector3)Random.insideUnitCircle, Quaternion.identity);
 				healthPotion.name = hpBottle.name;
 			}
-			int randomMana = Random.Range(0, 101);
-			if (randomMana >= 0 && randomMana <= 50)
+
+			if (Random.value < manaDropChance)
 			{
 				GameObject manaPotion = Instantiate(manaBottle, transform.position + (Vector3)Random.insideUnitCircle, Quaternion.identity);
 				manaPotion.name = manaBottle.name;
@@ -37,6 +38,7 @@ public class Destructibles : MonoBehaviour
 				GameObject piece = listPotPieces[Random.Range(0, listPotPieces.Count)];
 				Instantiate(piece, transform.position, Quaternion.identity);
 			}
+			
 			Destroy(gameObject);
 		}
 	}

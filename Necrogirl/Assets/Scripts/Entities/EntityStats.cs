@@ -21,10 +21,12 @@ public abstract class EntityStats : MonoBehaviour, IComparable<EntityStats>
 	public GameObject deathEffect;
 
 	// Properties.
-	protected float AttackInterval => 1f / stats.GetDynamicStat(Stat.AttackSpeed);
+	protected float BaseAttackInterval => 1f / stats.GetDynamicStat(Stat.AttackSpeed);
+	public float CurrentHealthNormalized => _currentHealth / stats.GetDynamicStat(Stat.MaxHealth);
 
 	// Protected fields.
 	protected Material _mat;
+	protected Coroutine _attackCoroutine;
 	protected float _currentHealth;
 	protected float _attackInterval;
 
@@ -32,6 +34,10 @@ public abstract class EntityStats : MonoBehaviour, IComparable<EntityStats>
 	{
 		_currentHealth = stats.GetDynamicStat(Stat.MaxHealth);
 	}
+
+	protected abstract void TryAttack();
+
+	protected abstract IEnumerator DoAttack();
 
 	public virtual void TakeDamage(float amount, bool weakpointHit, Vector3 attackerPos = default, float knockBackStrength = 0f)
 	{
@@ -93,7 +99,9 @@ public abstract class EntityStats : MonoBehaviour, IComparable<EntityStats>
 			yield break;
 
 		rb2D.velocity = Vector3.zero;
+
 		brain.enabled = false;
+		brain.StopAllCoroutines();
 
 		Vector2 direction = transform.position - attackerPos;
 		float knockBackStrength = strength * (1f - stats.GetStaticStat(Stat.KnockBackRes));
@@ -109,6 +117,17 @@ public abstract class EntityStats : MonoBehaviour, IComparable<EntityStats>
 
     public int CompareTo(EntityStats other)
     {
-        return other.priority - this.priority;
+		// Priortize the player if there's no other unit in sight.
+		if (this.priority == 0 && other.priority != 0)
+			return 1;
+		else if (this.priority != 0 && other.priority == 0)
+			return -1;
+
+		// Else, priortize the unit with the highest priority value.
+		if (this.priority != other.priority)
+			return other.priority - this.priority;
+		       
+		// Lastly, priortize the unit with the lower health.
+		return this.CurrentHealthNormalized.CompareTo(other.CurrentHealthNormalized);
     }
 }

@@ -10,11 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4038556098368311010, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -3.19
       objectReference: {fileID: 0}
     - target: {fileID: 4038556098368311010, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -3.28
       objectReference: {fileID: 0}
     - target: {fileID: 4038556098368311010, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -142,6 +142,7 @@ MonoBehaviour:
   maxMovementDelta: 0.5
   rb2D: {fileID: 6053901303285279476}
   animator: {fileID: 6997130681893881835}
+  heart: {fileID: 1556084932676576018}
   stats: {fileID: 11400000, guid: 8f906735cfc863b4fb0d6a3985cca268, type: 2}
   repelRange: 1.5
   repelAmplitude: 3
@@ -150,6 +151,7 @@ MonoBehaviour:
   spotLayer:
     serializedVersion: 2
     m_Bits: 72
+  forceFollowPlayerLimit: 15
 --- !u!114 &1556084932676576018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,7 +170,7 @@ MonoBehaviour:
   dmgTextLoc: {fileID: 2417811803671844636}
   stats: {fileID: 11400000, guid: 8f906735cfc863b4fb0d6a3985cca268, type: 2}
   damageFlashTime: 0.2
-  priority: 1
+  priority: 2
   deathEffect: {fileID: 8785179139041795559, guid: 90f8049227c718b45a849b688c69c3e4, type: 3}
   attackRange: {x: 1.5, y: 1.5}
   hitLayer:

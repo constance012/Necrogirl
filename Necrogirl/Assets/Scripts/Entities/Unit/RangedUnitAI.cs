@@ -1,37 +1,64 @@
 using UnityEngine;
 
-public class RangedUnitAI : EntityAI
+public class RangedUnitAI : UnitAI
 {
 	[Header("Keep Distance Settings"), Space]
-	[SerializeField] private float minDistance;
+	[SerializeField] private float retreatMinDistance;
 
-	protected override void Start()
-	{
-		base.Start();
-		_nearbyEntities.Add(this.rb2D);
-	}
+	// Protected fields.
+	protected UnitStats _unitStats;
 
-	protected override void FixedUpdate()
+    protected override void Start()
     {
-        base.FixedUpdate();
-
-		if (TrySelectTarget())
-			FollowTarget();
+        base.Start();
+		_unitStats = heart as UnitStats;
     }
 
-    protected override void FollowTarget()
+    protected override void FixedUpdate()
     {
-        if (target.gameObject.layer == LayerMask.NameToLayer("Player"))
-			base.FollowTarget();
+		if (PlayerStats.IsDeath)
+		 	return;
+
+        base.FixedUpdate();
+
+		if (TrySelectTarget() && target != null)
+			ProcessTarget();
+    }
+
+    private void ProcessTarget()
+    {
+        if (target == _player)
+		{
+			_forcedStopMoving = false;
+			RequestNewPath(PlayerMovement.Position);
+		}
 		else
 		{
 			float distance = Vector3.Distance(target.position, transform.position);
-			Vector2 direction = (target.position - transform.position).normalized;
-			Vector2 velocity = distance < minDistance ? CalculateVelocity(-direction) : CalculateVelocity(direction);
+			_forcedStopMoving = distance <= _unitStats.RangedAttackRadius;
 			
-			CheckFlip();
+			if (distance <= retreatMinDistance)
+			{
+				Vector2 direction = (transform.position - target.position).normalized;
+				Vector2 velocity = CalculateVelocity(direction);
+				
+				CheckFlip();
 
-			rb2D.velocity = velocity;
+				rb2D.velocity = velocity;
+			}
+			else if (distance > _unitStats.RangedAttackRadius)
+			{
+				_forcedStopMoving = false;
+				RequestNewPath(target.position);
+			}
 		}
+    }
+
+    protected override void OnDrawGizmosSelected()
+    {
+        base.OnDrawGizmosSelected();
+
+		Gizmos.color = Color.cyan;
+		Gizmos.DrawWireSphere(transform.position, retreatMinDistance);
     }
 }

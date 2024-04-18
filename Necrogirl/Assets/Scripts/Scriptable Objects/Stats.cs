@@ -11,11 +11,12 @@ public class Stats : ScriptableObject
 	public SerializedDictionary<Stat, float> dynamicStats = new SerializedDictionary<Stat, float>();
 
 	// Private fields.
-	private List<StatsUpgrade> appliedUpgrades = new List<StatsUpgrade>();
-	private HashSet<Stat> toStringIgnoreStats = new HashSet<Stat>()
+	private readonly List<StatsUpgrade> appliedUpgrades = new List<StatsUpgrade>();
+	private readonly HashSet<Stat> toStringIgnoreStats = new HashSet<Stat>()
 	{
 		Stat.ManaCost,
 		Stat.LifeStealRatio,
+		Stat.HealEfficiencyLossRatio,
 		Stat.ProjectileSpeed,
 		Stat.ProjectileLifeTime,
 		Stat.ProjectileTrackingRigidity,
@@ -114,6 +115,7 @@ public enum Stat
 	KnockBackRes,
 	ManaCost,
 	LifeStealRatio,
+	HealEfficiencyLossRatio,
 	ProjectileSpeed,
 	ProjectileTrackingRigidity,
 	ProjectileLifeTime

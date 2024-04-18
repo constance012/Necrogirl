@@ -162,6 +162,7 @@ MonoBehaviour:
   maxMovementDelta: 0.5
   rb2D: {fileID: 6053901303285279476}
   animator: {fileID: 6997130681893881835}
+  heart: {fileID: 9024563682823732112}
   stats: {fileID: 11400000, guid: ce1d907983bdf1a4d9d6518e19b82a3c, type: 2}
   repelRange: 1.5
   repelAmplitude: 3
@@ -170,6 +171,7 @@ MonoBehaviour:
   spotLayer:
     serializedVersion: 2
     m_Bits: 72
+  forceFollowPlayerLimit: 15
 --- !u!114 &9024563682823732112
 MonoBehaviour:
   m_ObjectHideFlags: 0

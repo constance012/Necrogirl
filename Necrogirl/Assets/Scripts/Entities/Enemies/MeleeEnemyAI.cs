@@ -17,10 +17,60 @@ public class MeleeEnemyAI : EntityAI
 		if (PlayerStats.IsDeath)
 			return;
 
-		SpotTarget();
+		base.FixedUpdate();
+
+		if (SpotTarget())
+			ChaseTarget();
     }
 
-    private void SpotTarget()
+	public void Alert()
+	{
+		_spottedPlayer = true;
+		_spotTimer = 0f;
+
+		_nearbyEntities.Add(rb2D);
+	}
+
+	protected virtual void ChaseTarget()
+	{	
+		if (TrySelectTarget() && target != null)
+			RequestNewPath(target.position);
+	}
+
+    protected override bool TrySelectTarget()
+    {
+		int hitColliders = Physics2D.OverlapCircle(transform.position, aggroRange, _contactFilter, _hitTargets);
+
+		if (hitColliders > 0)
+		{
+			_inAggroTargets.Clear();
+			for (int i = 0; i < hitColliders; i++)
+			{
+				EntityStats entity = _hitTargets[i].GetComponentInParent<EntityStats>();
+
+				if (entity != null)
+					_inAggroTargets.Add(entity);
+			}
+			
+			// Sort by priority if the list is not empty.
+			if (_inAggroTargets.Count > 0)
+			{
+				// Only assign new target if it's different from the previous one or the previous is null.
+				if (target == null || target != _inAggroTargets[0].transform)
+				{
+					_inAggroTargets.Sort();
+					target = _inAggroTargets[0].transform;
+					Debug.Log(target.name);
+				}
+			}
+
+			return _inAggroTargets.Count > 0;
+		} 
+
+		return false;
+    }
+
+    private bool SpotTarget()
     {
         if (!_spottedPlayer)
 		{
@@ -35,22 +85,8 @@ public class MeleeEnemyAI : EntityAI
 			}
 			else
 				_spotTimer = spotTimer;
-
-			return;
 		}
-
-		animator.SetFloat("Speed", rb2D.velocity.sqrMagnitude);
 		
-		if (TrySelectTarget())
-			FollowTarget();
-	}
-
-	public void Alert()
-	{
-		_spottedPlayer = true;
-		_spotTimer = 0f;
-
-		// Add this enemy to the hash set.
-		_nearbyEntities.Add(rb2D);
+		return _spottedPlayer;
 	}
 }

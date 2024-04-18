@@ -18,11 +18,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4038556098368311010, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -13.775396
       objectReference: {fileID: 0}
     - target: {fileID: 4038556098368311010, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.61768854
       objectReference: {fileID: 0}
     - target: {fileID: 4038556098368311010, guid: 6f9b7f4ba3b68324887d2993e7aaf8d5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -147,18 +147,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   seekOnStart: 0
   target: {fileID: 0}
-  maxMovementDelta: 1
+  maxMovementDelta: 0.7
   rb2D: {fileID: 6053901303285279476}
   animator: {fileID: 6997130681893881835}
+  heart: {fileID: 6424138380128727037}
   stats: {fileID: 11400000, guid: 71d217be4f936a14b916639d1b05e667, type: 2}
   repelRange: 1.5
   repelAmplitude: 3
-  aggroRange: 16.2
+  aggroRange: 16
   spotTimer: 0.5
   spotLayer:
     serializedVersion: 2
     m_Bits: 72
-  minDistance: 10
+  forceFollowPlayerLimit: 15
+  retreatMinDistance: 5
 --- !u!114 &6424138380128727037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,9 +179,9 @@ MonoBehaviour:
   dmgTextLoc: {fileID: 2417811803671844636}
   stats: {fileID: 11400000, guid: 71d217be4f936a14b916639d1b05e667, type: 2}
   damageFlashTime: 0.2
-  priority: 2
+  priority: 1
   deathEffect: {fileID: 8785179139041795559, guid: 90f8049227c718b45a849b688c69c3e4, type: 3}
-  attackRange: {x: 13.5, y: 13.5}
+  attackRange: {x: 14, y: 14}
   hitLayer:
     serializedVersion: 2
     m_Bits: 64

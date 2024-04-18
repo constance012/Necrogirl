@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class PlayerStats : EntityStats
 {
@@ -48,32 +49,49 @@ public class PlayerStats : EntityStats
 		if (_invincibilityTime > 0f)
 			_invincibilityTime -= Time.deltaTime;
 
-		Attack();
+		TryAttack();
 	}
 
-	private void Attack()
+	protected override void TryAttack()
 	{
 		_attackInterval -= Time.deltaTime;
 
 		if (_attackInterval <= 0f)
 		{
-			if (InputManager.Instance.GetKeyDown(KeybindingActions.PrimaryAttack))
-			{
-				Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-				Vector2 direction = (mousePos - PlayerMovement.Position).normalized;
-				float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+			if (_attackCoroutine != null)
+				StopCoroutine(_attackCoroutine);
 
-				GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-				projectile.name = projectilePrefab.name;
-				projectile.transform.eulerAngles = Vector3.forward * angle;
-				projectile.GetComponent<SimpleProjectile>().Initialize(this.stats, null);
-
-				_attackInterval = AttackInterval;
-			}
+            _attackCoroutine = StartCoroutine(DoAttack());
 		}
 	}
 
-	public override void TakeDamage(float amount, bool weakpointHit, Vector3 attackerPos = default, float knockBackStrength = 0f)
+    protected override IEnumerator DoAttack()
+    {
+        if (InputManager.Instance.GetKeyDown(KeybindingActions.PrimaryAttack))
+		{
+			rb2D.velocity = Vector2.zero;
+			
+			brain.enabled = false;
+			brain.StopAllCoroutines();
+
+			Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			Vector2 direction = (mousePos - PlayerMovement.Position).normalized;
+			float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+			GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+			projectile.name = projectilePrefab.name;
+			projectile.transform.eulerAngles = Vector3.forward * angle;
+			projectile.GetComponent<SimpleProjectile>().Initialize(this.stats, null);
+
+			_attackInterval = BaseAttackInterval;
+
+			yield return new WaitForSeconds(.2f);
+
+			brain.enabled = true;
+		}
+    }
+
+    public override void TakeDamage(float amount, bool weakpointHit, Vector3 attackerPos = default, float knockBackStrength = 0f)
 	{
 		if (IsAlive && _invincibilityTime <= 0f)
 		{

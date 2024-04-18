@@ -1,18 +1,15 @@
 using UnityEngine;
 
-public class MeleeUnitAI : EntityAI
+public class MeleeUnitAI : UnitAI
 {
-	protected override void Start()
-	{
-		base.Start();
-		_nearbyEntities.Add(this.rb2D);
-	}
-
     protected override void FixedUpdate()
     {
+        if (PlayerStats.IsDeath)
+		 	return;
+
         base.FixedUpdate();
 
-		if (TrySelectTarget())
-			FollowTarget();
+		if (TrySelectTarget() && target != null)
+			RequestNewPath(target.position);
     }
 }

@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EntityAI : Seeker
+public abstract class EntityAI : Seeker
 {
     [Header("References"), Space]
     [SerializeField] protected Rigidbody2D rb2D;
 	[SerializeField] protected Animator animator;
+	[SerializeField] protected EntityStats heart;
 	[SerializeField] protected Stats stats;
 
     [Header("Mobility Settings"), Space]
@@ -20,11 +21,12 @@ public class EntityAI : Seeker
 
     // Protected fields.
     protected static HashSet<Rigidbody2D> _nearbyEntities;
-	protected Collider2D[] _hitTargets = new Collider2D[5];
+	protected readonly Collider2D[] _hitTargets = new Collider2D[5];
+	protected readonly List<EntityStats> _inAggroTargets = new List<EntityStats>();
 	protected ContactFilter2D _contactFilter;
-	protected List<EntityStats> _inAggroTargets = new List<EntityStats>();
 	protected Vector2 _targetPreviousPos;
     protected bool _facingRight = true;
+	protected bool _forcedStopMoving;
 
     protected virtual void Start()
     {
@@ -43,50 +45,20 @@ public class EntityAI : Seeker
 
     protected virtual void FixedUpdate()
 	{
-		if (PlayerStats.IsDeath)
-		 	return;
-		
 		animator.SetFloat("Speed", rb2D.velocity.sqrMagnitude);
 	}
 
-	protected virtual void FollowTarget()
+	protected void RequestNewPath(Vector3 toPos)
 	{
 		// Request a path if the target has moved a certain distance fron the last position.
-		if (Vector3.Distance(target.position, _targetPreviousPos) >= maxMovementDelta)
+		if (Vector3.Distance(toPos, _targetPreviousPos) >= maxMovementDelta)
 		{
-			PathRequester.Request(transform.position, target.position, this.gameObject, OnPathFound);
-			_targetPreviousPos = target.position;
+			PathRequester.Request(transform.position, toPos, this.gameObject, OnPathFound);
+			_targetPreviousPos = toPos;
 		}
 	}
 
-	protected bool TrySelectTarget()
-	{
-		int hitColliders = Physics2D.OverlapCircle(transform.position, aggroRange, _contactFilter, _hitTargets);
-
-		if (hitColliders > 0)
-		{
-			_inAggroTargets.Clear();
-			for (int i = 0; i < hitColliders; i++)
-			{
-				EntityStats entity = _hitTargets[i].GetComponentInParent<EntityStats>();
-
-				if (entity != null)
-					_inAggroTargets.Add(entity);
-			}
-			
-			// Sort by priority if the list is not empty.
-			if (_inAggroTargets.Count > 0)
-			{
-				_inAggroTargets.Sort();
-				target = _inAggroTargets[0].transform;
-				Debug.Log(target.name);
-			}
-
-			return _inAggroTargets.Count > 0;
-		} 
-
-		return false;
-	}
+	protected abstract bool TrySelectTarget();
 
     protected override IEnumerator ExecuteFoundPath(int previousIndex = -1)
     {
@@ -97,7 +69,7 @@ public class EntityAI : Seeker
 
 		//Debug.Log($"{gameObject.name} following path...");
 
-		while (true)
+		while (!_forcedStopMoving)
 		{
 			float distanceToCurrent = Vector2.Distance(rb2D.position, currentWaypoint);
 
@@ -109,9 +81,7 @@ public class EntityAI : Seeker
 				if (_waypointIndex >= _path.Length)
 				{
 					Debug.Log("No waypoint left.");
-					_waypointIndex = 0;
-					_path = new Vector3[0];
-					rb2D.velocity = Vector2.zero;
+					StopFollowPath();
 					yield break;
 				}
 
@@ -127,7 +97,16 @@ public class EntityAI : Seeker
 
 			yield return new WaitForFixedUpdate();
 		}
+
+		StopFollowPath();
     }
+	
+	protected void StopFollowPath()
+	{
+		_waypointIndex = 0;
+		_path = new Vector3[0];
+		rb2D.velocity = Vector2.zero;
+	}
 
     protected void CheckFlip()
 	{
@@ -170,7 +149,7 @@ public class EntityAI : Seeker
 		return velocity;
 	}
 
-    private void OnDrawGizmosSelected()
+    protected virtual void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
 		Gizmos.DrawWireSphere(transform.position, repelRange);

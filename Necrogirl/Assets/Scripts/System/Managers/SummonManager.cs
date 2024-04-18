@@ -55,13 +55,10 @@ public class SummonManager : Singleton<SummonManager>
 			float x = Random.Range(PlayerMovement.Position.x - summonRange.x, PlayerMovement.Position.x + summonRange.x);
 			float y = Random.Range(PlayerMovement.Position.y - summonRange.y, PlayerMovement.Position.y + summonRange.y);
 
-			GameObject unit;
-			if (index == 0)  // Random Knight
-				unit = Instantiate(unitPrefabs[Random.Range(0, 2)], new Vector2(x, y), Quaternion.identity);
-			else
-				unit = Instantiate(unitPrefabs[index + 1], new Vector2(x, y), Quaternion.identity);
+			int prefabIndex = index == 0 ? Random.Range(0, 2) : index + 1;
 
-			unit.name = unitPrefabs[index].name;
+			GameObject unit = Instantiate(unitPrefabs[prefabIndex], new Vector2(x, y), Quaternion.identity);
+			unit.name = unitPrefabs[prefabIndex].name;
 			unit.transform.SetParent(container);
 
 			player.ConsumeMana(manaCost);
@@ -81,8 +78,10 @@ public class SummonManager : Singleton<SummonManager>
 			float x = Random.Range(PlayerMovement.Position.x - summonRange.x, PlayerMovement.Position.x + summonRange.x);
 			float y = Random.Range(PlayerMovement.Position.y - summonRange.y, PlayerMovement.Position.y + summonRange.y);
 
-			GameObject unit = Instantiate(unitPrefabs[index], new Vector2(x, y), Quaternion.identity);
-			unit.name = unitPrefabs[index].name;
+			int prefabIndex = index == 0 ? Random.Range(0, 2) : index + 1;
+
+			GameObject unit = Instantiate(unitPrefabs[prefabIndex], new Vector2(x, y), Quaternion.identity);
+			unit.name = unitPrefabs[prefabIndex].name;
 			unit.transform.SetParent(container);
 
 			player.ConsumeMana(manaCost);

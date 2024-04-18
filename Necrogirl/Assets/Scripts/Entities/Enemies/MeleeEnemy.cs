@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class MeleeEnemy : EnemyStats
@@ -5,27 +6,31 @@ public class MeleeEnemy : EnemyStats
 	[Header("Animator"), Space]
 	[SerializeField] private Animator animator;
 
-    private void LateUpdate()
-	{
-		_attackInterval -= Time.deltaTime;
+    protected override IEnumerator DoAttack()
+    {
+		int hitColliders = Physics2D.OverlapBox(transform.position, attackRange, 0f, _contactFilter, _hitObjects);
 
-		if (_attackInterval <= 0f && !PlayerStats.IsDeath)
+		if (hitColliders > 0)
 		{
-			int hitColliders = Physics2D.OverlapBox(transform.position, attackRange, 0f, _contactFilter, _hitObjects);
+			rb2D.velocity = Vector2.zero;
 
-			if (hitColliders > 0)
+			brain.enabled = false;
+			brain.StopAllCoroutines();
+
+			animator.Play("Slash");			
+			for (int i = 0; i < hitColliders; i++)
 			{
-				animator.Play("Slash");			
-				for (int i = 0; i < hitColliders; i++)
-				{
-					EntityStats entity = _hitObjects[i].GetComponentInParent<EntityStats>();
+				EntityStats entity = _hitObjects[i].GetComponentInParent<EntityStats>();
 
-					if (entity != null)
-						entity.TakeDamage(stats.GetDynamicStat(Stat.Damage), false, transform.position, stats.GetStaticStat(Stat.KnockBackStrength));
-				}
-
-				_attackInterval = 1f / stats.GetDynamicStat(Stat.AttackSpeed);
+				if (entity != null)
+					entity.TakeDamage(stats.GetDynamicStat(Stat.Damage), false, transform.position, stats.GetStaticStat(Stat.KnockBackStrength));
 			}
+
+			_attackInterval = BaseAttackInterval;
+
+			yield return new WaitForSeconds(.2f);
+
+			brain.enabled = true;
 		}
-	}
+    }
 }

@@ -1,17 +1,21 @@
 using UnityEngine;
 
-public class UnitStats : EntityStats
+public abstract class UnitStats : EntityStats
 {
-	[Header("Unit Stats"), Space]
-	[Space, SerializeField] protected Vector2 attackRange;
+	[Header("Attacking Settings"), Space]
+	[SerializeField] protected Vector2 attackRange;
 	[SerializeField] protected LayerMask hitLayer;
 
 	[Header("Health Bar"), Space]
 	[SerializeField] protected WorldHealthBar healthBar;
 
+	// Properties.
+	public float RangedAttackRadius => _rangedAttackRadius;
+
 	// Protected fields.
 	protected Collider2D[] _hitObjects = new Collider2D[2];
 	protected ContactFilter2D _contactFilter;
+	protected float _rangedAttackRadius;
 
 	private void Awake()
 	{
@@ -24,12 +28,31 @@ public class UnitStats : EntityStats
 
 		_contactFilter.layerMask = hitLayer;
 		_contactFilter.useLayerMask = true;
+		_rangedAttackRadius = attackRange.x / 2f;
 
 		healthBar.SetMaxHealth(stats.GetDynamicStat(Stat.MaxHealth));
 		healthBar.name = $"{gameObject.name} Health Bar";
 	}
 
-	public override void TakeDamage(float amount, bool weakpointHit, Vector3 attackerPos = default, float knockBackStrength = 0)
+	private void Update()
+    {
+        TryAttack();
+    }
+
+    protected override void TryAttack()
+    {
+        _attackInterval -= Time.deltaTime;
+
+		if (_attackInterval <= 0f)
+		{
+			if (_attackCoroutine != null)
+				StopCoroutine(_attackCoroutine);
+
+            _attackCoroutine = StartCoroutine(DoAttack());
+		}
+    }
+
+    public override void TakeDamage(float amount, bool weakpointHit, Vector3 attackerPos = default, float knockBackStrength = 0)
 	{
 		base.TakeDamage(amount, weakpointHit, attackerPos, knockBackStrength);
 

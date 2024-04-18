@@ -9,16 +9,27 @@ public class GameManager : Singleton<GameManager>
 	[SerializeField] private GameObject summaryScreen;
 	[SerializeField] private GameObject pauseMenu;
 	[SerializeField] private TextMeshProUGUI coinCollectedText;
+	[SerializeField] private TextMeshProUGUI enemyCountText;
+	[SerializeField] private TextMeshProUGUI unitCountText;
 
-	[Header("Enemy Container"), Space]
-	[SerializeField] private Transform enemies;
+	[Header("Containers"), Space]
+	[SerializeField] private Transform enemyContainer;
+	[SerializeField] private Transform unitContainer;
 
 	// Properties.
 	public bool GameFinished { get; private set; }
 
+	// Private fields.
+	private int _maxEnemies;
+
+	private void Start()
+	{
+		_maxEnemies = enemyContainer.childCount;
+	}
+
 	private void Update()
 	{
-		if (enemies.childCount == 0)
+		if (enemyContainer.childCount == 0)
 		{
 			ShowVictoryScreen();
 			return;
@@ -26,6 +37,12 @@ public class GameManager : Singleton<GameManager>
 
 		if (InputManager.Instance.GetKeyDown(KeybindingActions.Pause))
 			Pause();
+	}
+
+	private void LateUpdate()
+	{
+		enemyCountText.text = $"{enemyContainer.childCount} / {_maxEnemies}";
+		unitCountText.text = unitContainer.childCount.ToString();
 	}
 
 	public void UpdateCurrentHealth(float currentHP)

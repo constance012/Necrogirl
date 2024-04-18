@@ -143,11 +143,12 @@ MonoBehaviour:
   maxMovementDelta: 0.5
   rb2D: {fileID: 1014346613664121353}
   animator: {fileID: 4254393940804923158}
+  heart: {fileID: 8455905308752089883}
   stats: {fileID: 11400000, guid: 10b47558c755c5449b5bfe3685e76637, type: 2}
   repelRange: 1.5
   repelAmplitude: 3
-  aggroRange: 11
-  spotTimer: 1
+  aggroRange: 14
+  spotTimer: 0.5
   spotLayer:
     serializedVersion: 2
     m_Bits: 520
@@ -169,7 +170,7 @@ MonoBehaviour:
   dmgTextLoc: {fileID: 8907454796238077921}
   stats: {fileID: 11400000, guid: 10b47558c755c5449b5bfe3685e76637, type: 2}
   damageFlashTime: 0.2
-  priority: 2
+  priority: 4
   deathEffect: {fileID: 8785179139041795559, guid: 90f8049227c718b45a849b688c69c3e4, type: 3}
   attackRange: {x: 1.5, y: 1.5}
   hitLayer:
