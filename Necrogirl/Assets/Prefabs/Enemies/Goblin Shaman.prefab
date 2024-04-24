@@ -116,14 +116,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   seekOnStart: 0
   target: {fileID: 0}
-  maxMovementDelta: 0.7
+  maxMovementDelta: 0.6
   rb2D: {fileID: 1014346613664121353}
   animator: {fileID: 4254393940804923158}
   heart: {fileID: 4193198861709201875}
   stats: {fileID: 11400000, guid: a733902aaf4a0d643984a85540c14d7f, type: 2}
   repelRange: 1.5
   repelAmplitude: 3
-  aggroRange: 14
+  aggroRange: 17
   spotTimer: 0.5
   spotLayer:
     serializedVersion: 2
@@ -147,7 +147,7 @@ MonoBehaviour:
   dmgTextLoc: {fileID: 8907454796238077921}
   stats: {fileID: 11400000, guid: a733902aaf4a0d643984a85540c14d7f, type: 2}
   damageFlashTime: 0.2
-  priority: 3
+  priority: 4
   deathEffect: {fileID: 8785179139041795559, guid: 90f8049227c718b45a849b688c69c3e4, type: 3}
   attackRange: {x: 10, y: 10}
   hitLayer:

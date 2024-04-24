@@ -10,11 +10,9 @@ public class GameManager : Singleton<GameManager>
 	[SerializeField] private GameObject pauseMenu;
 	[SerializeField] private TextMeshProUGUI coinCollectedText;
 	[SerializeField] private TextMeshProUGUI enemyCountText;
-	[SerializeField] private TextMeshProUGUI unitCountText;
 
 	[Header("Containers"), Space]
 	[SerializeField] private Transform enemyContainer;
-	[SerializeField] private Transform unitContainer;
 
 	// Properties.
 	public bool GameFinished { get; private set; }
@@ -42,7 +40,6 @@ public class GameManager : Singleton<GameManager>
 	private void LateUpdate()
 	{
 		enemyCountText.text = $"{enemyContainer.childCount} / {_maxEnemies}";
-		unitCountText.text = unitContainer.childCount.ToString();
 	}
 
 	public void UpdateCurrentHealth(float currentHP)

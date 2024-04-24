@@ -15,7 +15,6 @@ public class MeleeEnemy : EnemyStats
 			rb2D.velocity = Vector2.zero;
 
 			brain.enabled = false;
-			brain.StopAllCoroutines();
 
 			animator.Play("Slash");			
 			for (int i = 0; i < hitColliders; i++)

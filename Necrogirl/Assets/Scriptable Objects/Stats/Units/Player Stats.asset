@@ -21,7 +21,7 @@ MonoBehaviour:
     - Key: 10
       Value: 10
     - Key: 11
-      Value: 30
+      Value: 0
     - Key: 12
       Value: 5
   dynamicStats:
@@ -29,9 +29,9 @@ MonoBehaviour:
     - Key: 0
       Value: 100
     - Key: 1
-      Value: 40
+      Value: 45
     - Key: 2
-      Value: 15
+      Value: 17
     - Key: 3
       Value: 1.2
     - Key: 4

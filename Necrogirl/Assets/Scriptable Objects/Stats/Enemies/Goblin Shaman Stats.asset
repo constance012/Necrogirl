@@ -15,9 +15,9 @@ MonoBehaviour:
   staticStats:
     _serializedList:
     - Key: 5
-      Value: 2
+      Value: 1
     - Key: 6
-      Value: 0.4
+      Value: 0.2
     - Key: 10
       Value: 10
     - Key: 11
@@ -27,9 +27,9 @@ MonoBehaviour:
   dynamicStats:
     _serializedList:
     - Key: 0
-      Value: 100
+      Value: 180
     - Key: 2
-      Value: 28
+      Value: 30
     - Key: 3
       Value: 0.7
     - Key: 4

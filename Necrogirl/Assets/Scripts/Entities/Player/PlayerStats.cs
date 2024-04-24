@@ -72,7 +72,6 @@ public class PlayerStats : EntityStats
 			rb2D.velocity = Vector2.zero;
 			
 			brain.enabled = false;
-			brain.StopAllCoroutines();
 
 			Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			Vector2 direction = (mousePos - PlayerMovement.Position).normalized;

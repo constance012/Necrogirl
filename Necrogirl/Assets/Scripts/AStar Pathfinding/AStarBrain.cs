@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityDebug = UnityEngine.Debug;
 
 public class AStarBrain : MonoBehaviour
 {
@@ -20,20 +18,15 @@ public class AStarBrain : MonoBehaviour
 		_closed = new HashSet<Node>();
 	}
 
-	public void StartFindingPath(Vector3 startPos, Vector3 endPos)
-	{
-		StartCoroutine(FindPath(startPos, endPos));
-	}
-
-	private IEnumerator FindPath(Vector3 startPos, Vector3 endPos)
+	public void FindPath(PathRequestData request, Action<PathResult> onFinishedProcessing)
 	{
 		Stopwatch sw = new Stopwatch();
 		sw.Start();
 
 		bool pathFound = false;
 
-		Node startNode = grid.FromWorldPosition(startPos);
-		Node endNode = grid.FromWorldPosition(endPos);
+		Node startNode = grid.FromWorldPosition(request.pathStart);
+		Node endNode = grid.FromWorldPosition(request.pathEnd);
 
 		// Only start finding path if both nodes are walkable.
 		if (startNode.walkable && endNode.walkable)
@@ -80,17 +73,16 @@ public class AStarBrain : MonoBehaviour
 			}
 		}
 
-		yield return null;
-
 		// Construct the path.
 		Vector3[] waypoints = new Vector3[0];
 		if (pathFound)
 		{
 			waypoints = ConstructPath(startNode, endNode);
+			pathFound = waypoints.Length > 0;
 		}
 		
 		// Invoke the requester's callback.
-		PathRequester.Instance.InvokeCallback(waypoints, pathFound);
+		onFinishedProcessing(new PathResult(waypoints, pathFound, request.requester, request.callback));
 	}
 
 	private Vector3[] ConstructPath(Node startNode, Node endNode)

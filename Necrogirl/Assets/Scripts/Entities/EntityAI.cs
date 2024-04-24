@@ -53,7 +53,7 @@ public abstract class EntityAI : Seeker
 		// Request a path if the target has moved a certain distance fron the last position.
 		if (Vector3.Distance(toPos, _targetPreviousPos) >= maxMovementDelta)
 		{
-			PathRequester.Request(transform.position, toPos, this.gameObject, OnPathFound);
+			PathRequester.Request(new PathRequestData(transform.position, toPos, this.gameObject, OnPathFound));
 			_targetPreviousPos = toPos;
 		}
 	}

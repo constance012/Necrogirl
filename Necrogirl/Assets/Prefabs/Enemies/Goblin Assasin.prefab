@@ -119,7 +119,7 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: 8549261ce51a62348b63d190d54749a8, type: 2}
   repelRange: 1.5
   repelAmplitude: 3
-  aggroRange: 14
+  aggroRange: 17
   spotTimer: 0.5
   spotLayer:
     serializedVersion: 2

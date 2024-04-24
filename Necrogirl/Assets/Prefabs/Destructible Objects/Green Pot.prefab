@@ -141,5 +141,5 @@ MonoBehaviour:
   manaBottle: {fileID: 2963722369247630759, guid: 190e1ccdf6be99943a100cf6cf7d89ff, type: 3}
   Coin: {fileID: 2963722369247630759, guid: d48499c2c92fb9a4dbff8677a8350a54, type: 3}
   coinCount: {x: 10, y: 30}
-  manaDropChance: 0.1
-  healthDropChance: 0.4
+  manaDropChance: 0.3
+  healthDropChance: 0.7

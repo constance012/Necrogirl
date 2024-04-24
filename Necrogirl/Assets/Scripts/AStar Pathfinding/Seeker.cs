@@ -22,7 +22,7 @@ public abstract class Seeker : MonoBehaviour
 		if (seekOnStart)
 		{
 			yield return new WaitForSeconds(.1f);
-			PathRequester.Request(transform.position, target.position, this.gameObject, OnPathFound);
+			PathRequester.Request(new PathRequestData(transform.position, target.position, this.gameObject, OnPathFound));
 		}
 	}
 

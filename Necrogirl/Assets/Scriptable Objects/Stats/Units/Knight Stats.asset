@@ -17,16 +17,16 @@ MonoBehaviour:
     - Key: 5
       Value: 1.5
     - Key: 6
-      Value: 0.4
+      Value: 0.6
     - Key: 7
-      Value: 10
+      Value: 8
   dynamicStats:
     _serializedList:
     - Key: 0
-      Value: 170
+      Value: 200
     - Key: 2
       Value: 25
     - Key: 3
-      Value: 0.8
+      Value: 1
     - Key: 4
-      Value: 5
+      Value: 5.3

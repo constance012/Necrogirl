@@ -24,4 +24,10 @@ public class UnitButton : MonoBehaviour
 		canvasGroup.alpha = currentMana < unitStats.GetStaticStat(Stat.ManaCost) ? .5f : 1f;
 		button.interactable = currentMana >= unitStats.GetStaticStat(Stat.ManaCost);
 	}
+
+	public void SetInteractable(bool state)
+	{
+		canvasGroup.alpha = !state ? .5f : 1f;
+		button.interactable = state;
+	}
 }

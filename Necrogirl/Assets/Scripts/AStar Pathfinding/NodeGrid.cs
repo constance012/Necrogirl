@@ -19,6 +19,7 @@ public class NodeGrid : MonoBehaviour
 
     // Private fields.
     private Node[,] _grid;
+	private Vector3 _selfWorldPos;
 	private int _width, _height;
 	private float _nodeRadius;
 
@@ -26,6 +27,7 @@ public class NodeGrid : MonoBehaviour
 
 	private void Awake()
 	{
+		_selfWorldPos = transform.position;
 		_nodeRadius = nodeDiameter / 2f;
 
 		// The amount of nodes in the X and Y axes.
@@ -34,6 +36,14 @@ public class NodeGrid : MonoBehaviour
 
 		CreateGrid();
 	}
+
+	#if UNITY_EDITOR
+	private void LateUpdate()
+	{
+		if (transform.position != _selfWorldPos)
+			transform.position =  _selfWorldPos;
+	}
+	#endif
 
 	public List<Node> GetNeighbors(Node node)
 	{
@@ -67,8 +77,8 @@ public class NodeGrid : MonoBehaviour
 	public Node FromWorldPosition(Vector3 worldPos)
 	{
 		// Finalize the coordinates based on the grid world position.
-		float finalizedX = worldPos.x - transform.position.x;
-		float finalizedY = worldPos.y - transform.position.y;
+		float finalizedX = worldPos.x - _selfWorldPos.x;
+		float finalizedY = worldPos.y - _selfWorldPos.y;
 
 		float percentX = (finalizedX + gridWorldSize.x / 2) / gridWorldSize.x;
 		float percentY = (finalizedY + gridWorldSize.y / 2) / gridWorldSize.y;

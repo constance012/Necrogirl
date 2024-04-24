@@ -110,7 +110,7 @@ public abstract class EntityStats : MonoBehaviour, IComparable<EntityStats>
 
 		rb2D.AddForce(force, ForceMode2D.Impulse);
 
-		yield return new WaitForSeconds(.3f);
+		yield return new WaitForSeconds(.2f);
 
 		brain.enabled = true;
 	}

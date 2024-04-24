@@ -112,14 +112,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   seekOnStart: 0
   target: {fileID: 0}
-  maxMovementDelta: 0.7
+  maxMovementDelta: 0.6
   rb2D: {fileID: 1014346613664121353}
   animator: {fileID: 4254393940804923158}
   heart: {fileID: 3006294094276067947}
   stats: {fileID: 11400000, guid: 84c965942f2a1764ea308231f1448aba, type: 2}
   repelRange: 1.5
   repelAmplitude: 3
-  aggroRange: 14
+  aggroRange: 17
   spotTimer: 0.5
   spotLayer:
     serializedVersion: 2

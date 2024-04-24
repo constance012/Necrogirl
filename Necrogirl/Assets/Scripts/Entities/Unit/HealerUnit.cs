@@ -33,7 +33,6 @@ public class HealerUnit : UnitStats
 			rb2D.velocity = Vector2.zero;
 
 			brain.enabled = false;
-			brain.StopAllCoroutines();
 
 			// Calculate the healing efficiency of all the on field healers.
 			float efficiency;
