@@ -1,12 +1,12 @@
-# Necrogirl (Original Jam Version)
+# Necrogirl (Post-Jam Version)
 
 ## OVERVIEW
-An entry for __Ludum Dare 55__ on _April 13, 2024_.
+This was originally an entry for __Ludum Dare 55__ on _April 13, 2024_.
 __THEME: SUMMONING__
 
-__NOTE:__ This branch is __READ-ONLY__, which means there's no more updates or commits will be made in order to preserve the original version used in the jam.
+But since the submission deadline has ended, this is the __Post-Jam__ version where we develop new features and expand the game further for future releases.
 
-Switch to the `post-jam` branch to view the latest version of this game, which will be released as a full game in the future.
+You can find the original __Jam__ version at the `jam-original` branch.
 
 ## DESCRIPTION
 A magical elf named __Asari__ who has the power to summon other units to fight along side her using her will power. Accompany her and her loyal friends to __strike__ through the __ferocious foes_ and achieve victory.
