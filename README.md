@@ -30,4 +30,14 @@ Play it _directly_ [__HERE__](https://constance012.itch.io/necrogirl).
 
 ## INGAME CAPTURES
 
+![Screenshot_1](Ingame_Captures/Screenshot_1.png)
+
+![Screenshot_2](Ingame_Captures/Screenshot_2.png)
+
+![Screenshot_3](Ingame_Captures/Screenshot_3.png)
+
+![Screenshot_4](Ingame_Captures/Screenshot_4.png)
+
+![Screenshot_4](Ingame_Captures/Screenshot_5.png)
+
 © 2024-2025 Hiyuka Studios.
