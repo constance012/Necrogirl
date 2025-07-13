@@ -30,7 +30,6 @@ public sealed class InventoryTabPage<TSlot, TItem>
 		for (int i = 0; i < tasks.Length; i++)
 		{
 			tasks[i] = slots[i].PerformEffect();
-			await Task.Delay(10);
 		}
 
 		await Task.WhenAll(tasks);
